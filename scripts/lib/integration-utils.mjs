@@ -73,11 +73,11 @@ export function matchesAnyPattern(relPath, patterns) {
 /**
  * Normalize a skill slug for vendored skills.
  */
-export function buildVendoredSlug(sourceId, originalSlug, renameMap = {}) {
+export function buildVendoredSlug(sourceId, originalSlug, renameMap = {}, options = {}) {
   if (renameMap[originalSlug]) {
     return renameMap[originalSlug];
   }
-  if (originalSlug.startsWith("integ-")) {
+  if (options.slugMode === "preserve" || originalSlug.startsWith("integ-")) {
     return originalSlug;
   }
   return `integ-${sourceId}-${originalSlug}`;
@@ -94,6 +94,34 @@ export function resolveTargetGroup(source, defaults = {}) {
     return defaults.targetGroup;
   }
   return `integ-${source.id}-skills`;
+}
+
+/**
+ * Resolve the git remote URL for an external source.
+ */
+export function resolveSourceRemote(source, defaults = {}) {
+  const remoteUrl = source.remoteUrl ?? defaults.remoteUrl;
+  if (remoteUrl) {
+    return remoteUrl;
+  }
+  if (!source.repo) {
+    throw new Error(`External source "${source.id}" is missing both repo and remoteUrl`);
+  }
+  return `https://github.com/${source.repo}.git`;
+}
+
+/**
+ * Resolve how vendored skill directories should be named.
+ */
+export function resolveSlugMode(source, defaults = {}) {
+  return source.slugMode ?? defaults.slugMode ?? "integ";
+}
+
+/**
+ * Resolve whether vendored SKILL.md files should be rewritten.
+ */
+export function resolveAttribution(source, defaults = {}) {
+  return source.attribution ?? defaults.attribution ?? "section";
 }
 
 /**

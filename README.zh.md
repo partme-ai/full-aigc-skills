@@ -61,8 +61,10 @@ npx skills add <owner>/aigc-skills
 | `npm run audit` | 检查分组目录与 marketplace 登记是否一致 |
 | `npm run sync:external` | 导入或更新整合技能 |
 | `npm run sync:external:dry` | 外部同步预演 |
+| `npm run sync:pippit` | 同步已配置的 Pippit / Gitee 技能源 |
 | `npm run inventory` | 生成平台覆盖清单 |
 
 ## 当前分组
 
 - `jimeng-skills`：即梦提示词与 CLI 生成技能
+- `pippit-skills`：小云雀 / Pippit 会话技能，组根目录保留上游 README

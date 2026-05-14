@@ -12,7 +12,10 @@ import {
   matchesAnyPattern,
   parseSkillFrontmatter,
   removeDirectory,
+  resolveAttribution,
   resolveRepoRoot,
+  resolveSlugMode,
+  resolveSourceRemote,
   resolveTargetGroup,
   runCommand,
   writeJson,
@@ -27,7 +30,13 @@ async function main() {
   const repoRoot = resolveRepoRoot();
   const { config } = await loadExternalSources(repoRoot);
   const defaults = config.defaults ?? {};
-  const enabledSources = config.sources.filter((source) => source.enabled !== false);
+  const enabledSources = config.sources
+    .filter((source) => source.enabled !== false)
+    .filter((source) => !options.sourceId || source.id === options.sourceId);
+
+  if (options.sourceId && enabledSources.length === 0) {
+    throw new Error(`No enabled external source matched id: ${options.sourceId}`);
+  }
 
   if (enabledSources.length === 0) {
     console.log("No enabled external sources. Edit config/external-sources.json first.");
@@ -70,23 +79,28 @@ async function main() {
       const checkout = await ensureCheckout(repoRoot, cacheRoot, source, defaults, options);
       sourceReport.commit = checkout.commit;
       const targetGroup = resolveTargetGroup(source, defaults);
+      const slugMode = resolveSlugMode(source, defaults);
+      const attribution = resolveAttribution(source, defaults);
       const discovered = await discoverSkills(checkout.dir, source, defaults);
 
       for (const skill of discovered) {
-        const vendoredSlug = buildVendoredSlug(source.id, skill.slug, source.rename ?? {});
+        const vendoredSlug = buildVendoredSlug(source.id, skill.slug, source.rename ?? {}, { slugMode });
         const targetDir = path.join(vendoredRoot, targetGroup, vendoredSlug);
         const relativePath = path.posix.join(targetGroup, vendoredSlug);
         expectedPaths.add(relativePath);
 
         const origin = {
           sourceId: source.id,
-          repo: source.repo,
+          repo: source.repo ?? source.remoteUrl ?? null,
+          remoteUrl: resolveSourceRemote(source, defaults),
           ref: sourceReport.ref,
           commit: checkout.commit,
           upstreamPath: skill.relativePath,
           upstreamSlug: skill.slug,
           targetGroup,
           vendoredSlug,
+          slugMode,
+          attribution,
           license: source.license ?? defaults.license ?? null,
           platforms: source.platforms ?? [],
           categories: source.categories ?? [],
@@ -127,7 +141,9 @@ async function main() {
 
         await removeDirectory(targetDir);
         await copyDirectory(skill.absolutePath, targetDir);
-        await patchSkillMetadata(targetDir, vendoredSlug, origin);
+        if (attribution !== "none") {
+          await patchSkillMetadata(targetDir, vendoredSlug, origin);
+        }
         await writeJson(path.join(targetDir, ORIGIN_FILE), { ...origin, fingerprint });
 
         sourceReport.imported.push({ path: relativePath, status });
@@ -137,6 +153,17 @@ async function main() {
           kind: "integrated",
           ...origin,
           fingerprint,
+        });
+      }
+
+        if (!options.dryRun) {
+        await syncGroupReadme({
+          repoRoot,
+          checkoutDir: checkout.dir,
+          targetGroupDir: path.join(vendoredRoot, targetGroup),
+          source,
+          defaults,
+          report,
         });
       }
 
@@ -180,6 +207,7 @@ function parseArgs(argv) {
     cacheDir: DEFAULT_CACHE_DIR,
     vendoredRoot: DEFAULT_VENDORED_ROOT,
     force: false,
+    sourceId: null,
   };
 
   for (let index = 0; index < argv.length; index++) {
@@ -188,6 +216,7 @@ function parseArgs(argv) {
     else if (arg === "--force") options.force = true;
     else if (arg === "--cache-dir") options.cacheDir = argv[++index];
     else if (arg === "--vendored-root") options.vendoredRoot = argv[++index];
+    else if (arg === "--source") options.sourceId = argv[++index];
     else if (arg === "--help" || arg === "-h") {
       printHelp();
       process.exit(0);
@@ -205,13 +234,29 @@ function printHelp() {
 Options:
   --dry-run            Show planned imports without writing vendored skills
   --force              Re-clone cached repositories
+  --source <id>        Sync only one configured external source
   --cache-dir <path>   Cache directory relative to repo root (default: ${DEFAULT_CACHE_DIR})
   --vendored-root <path> Output skills root (default: ${DEFAULT_VENDORED_ROOT})
 `);
 }
 
+async function syncGroupReadme({ repoRoot, checkoutDir, targetGroupDir, source, defaults, report }) {
+  const readmePath = source.groupReadme ?? defaults.groupReadme;
+  if (!readmePath) {
+    return;
+  }
+
+  const sourceReadme = path.join(checkoutDir, readmePath);
+  const targetReadme = path.join(targetGroupDir, path.basename(readmePath));
+  await fs.mkdir(targetGroupDir, { recursive: true });
+  await fs.copyFile(sourceReadme, targetReadme);
+  report.groupReadmes = report.groupReadmes ?? [];
+  report.groupReadmes.push(path.relative(repoRoot, targetReadme));
+}
+
 async function ensureCheckout(repoRoot, cacheRoot, source, defaults, options) {
   const ref = source.ref ?? defaults.ref ?? "main";
+  const remoteUrl = resolveSourceRemote(source, defaults);
   const checkoutDir = path.join(cacheRoot, source.id);
   const gitDir = path.join(checkoutDir, ".git");
 
@@ -233,7 +278,7 @@ async function ensureCheckout(repoRoot, cacheRoot, source, defaults, options) {
       "1",
       "--branch",
       ref,
-      `https://github.com/${source.repo}.git`,
+      remoteUrl,
       checkoutDir,
     ]);
   }

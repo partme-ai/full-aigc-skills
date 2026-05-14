@@ -3,10 +3,10 @@
 External repositories are vendored into grouped directories:
 
 ```text
-skills/<targetGroup>/<integ-skill>/SKILL.md
+skills/<targetGroup>/<skill-name>/SKILL.md
 ```
 
-Default `targetGroup` is `integ-<sourceId>-skills`.
+Default `targetGroup` is `integ-<sourceId>-skills`. Vendor groups such as `pippit-skills` can preserve upstream skill names and copy the upstream README to the group root.
 
 ## Configure a Source
 
@@ -19,28 +19,38 @@ Edit `config/external-sources.json`:
     "ref": "main",
     "skillRoots": ["skills"],
     "layout": "auto",
+    "slugMode": "integ",
+    "attribution": "section",
     "enabled": true
   },
   "sources": [
     {
-      "id": "baoyu",
-      "repo": "JimLiu/baoyu-skills",
-      "ref": "main",
-      "enabled": false,
+      "id": "pippit",
+      "remoteUrl": "https://gitee.com/Pippit-dev/pippit-skills.git",
+      "ref": "master",
+      "enabled": true,
       "layout": "flat",
-      "targetGroup": "integ-baoyu-skills",
-      "platforms": ["wechat", "weibo", "x", "youtube"],
-      "categories": ["content", "utility"],
-      "include": [
-        "baoyu-post-to-wechat",
-        "baoyu-post-to-weibo",
-        "baoyu-post-to-x"
-      ],
-      "license": "MIT-0"
+      "targetGroup": "pippit-skills",
+      "slugMode": "preserve",
+      "attribution": "none",
+      "groupReadme": "README.md",
+      "platforms": ["generic"],
+      "license": "MIT"
     }
   ]
 }
 ```
+
+Field reference:
+
+| Field | Meaning |
+|-------|---------|
+| `repo` | GitHub `owner/name` |
+| `remoteUrl` | Full git remote URL for GitHub, Gitee, or other hosts |
+| `targetGroup` | Destination group under `skills/` |
+| `slugMode` | `preserve` keeps upstream folder names, `integ` prefixes vendored skills |
+| `attribution` | `none` keeps upstream `SKILL.md` unchanged, `section` appends integration attribution |
+| `groupReadme` | Upstream README path copied verbatim to the group root |
 
 `layout` values:
 
@@ -52,29 +62,42 @@ Edit `config/external-sources.json`:
 
 ## Run Sync
 
+All enabled sources:
+
+```bash
+npm run sync:external
+```
+
+One source:
+
+```bash
+npm run sync:external -- --source pippit
+```
+
+Shortcut for Pippit:
+
+```bash
+npm run sync:pippit
+```
+
 Dry run:
 
 ```bash
 npm run sync:external:dry
 ```
 
-Apply:
-
-```bash
-npm run sync:external
-```
-
 ## Review Output
 
 - `integrations/manifest.json` stores the latest successful sync metadata.
 - `integrations/reports/latest.json` stores the latest run summary.
-- Each vendored skill contains `.aigc-origin.json` and an `## Integration Attribution` section in `SKILL.md`.
+- Vendored skills contain `.aigc-origin.json`.
+- When `attribution` is `section`, `SKILL.md` also receives an integration attribution block.
 
 ## Register Imported Skills
 
 The sync script does not edit `.claude-plugin/marketplace.json` automatically. After review:
 
-1. Register approved skills under the matching `integ-*` plugin entry.
+1. Register approved skills under the matching group plugin entry.
 2. Update `docs/aigc-skill-group-mapping.md`.
 3. Run `npm run audit`.
 4. Run `npm run inventory`.

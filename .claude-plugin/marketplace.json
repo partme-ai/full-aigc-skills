@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "AIGC skills for multi-platform content creation, publishing, and media generation",
-    "version": "0.2.0"
+    "version": "0.3.0"
   },
   "plugins": [
     {
@@ -23,6 +23,15 @@
         "./skills/jimeng-skills/jimeng-prompt-image2video",
         "./skills/jimeng-skills/jimeng-prompt-text2image",
         "./skills/jimeng-skills/jimeng-prompt-text2video"
+      ]
+    },
+    {
+      "name": "pippit-skills",
+      "description": "Pippit / 小云雀 agent session skills for image and video creation workflows",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/pippit-skills/xyq-nest-skill"
       ]
     }
   ]

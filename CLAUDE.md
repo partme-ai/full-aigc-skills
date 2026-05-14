@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-AIGC skill marketplace for first-party and curated third-party skills. Version: **0.2.0**.
+AIGC skill marketplace for first-party and curated third-party skills. Version: **0.3.0**.
 
 ## Architecture
 

@@ -61,8 +61,10 @@ See [docs/syncing-external-skills.md](./docs/syncing-external-skills.md).
 | `npm run audit` | Check grouped skills against marketplace registration |
 | `npm run sync:external` | Import or update vendored skills |
 | `npm run sync:external:dry` | Dry-run external sync |
+| `npm run sync:pippit` | Sync the configured Pippit / Gitee source |
 | `npm run inventory` | Build platform inventory |
 
 ## Current Groups
 
 - `jimeng-skills`: Jimeng prompt and CLI generation skills
+- `pippit-skills`: Pippit / 小云雀 session skills, with upstream README kept at the group root

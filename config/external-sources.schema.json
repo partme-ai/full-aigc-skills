@@ -13,6 +13,7 @@
       "type": "object",
       "properties": {
         "ref": { "type": "string" },
+        "remoteUrl": { "type": "string" },
         "skillRoots": {
           "type": "array",
           "items": { "type": "string" }
@@ -23,6 +24,15 @@
           "type": "string",
           "enum": ["flat", "grouped", "auto"]
         },
+        "slugMode": {
+          "type": "string",
+          "enum": ["preserve", "integ"]
+        },
+        "attribution": {
+          "type": "string",
+          "enum": ["none", "section"]
+        },
+        "groupReadme": { "type": "string" },
         "license": { "type": "string" },
         "enabled": { "type": "boolean" }
       },
@@ -32,7 +42,7 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "repo"],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string",
@@ -41,6 +51,10 @@
           "repo": {
             "type": "string",
             "description": "owner/name on GitHub"
+          },
+          "remoteUrl": {
+            "type": "string",
+            "description": "Full git remote URL for GitHub, Gitee, or other hosts"
           },
           "ref": { "type": "string" },
           "enabled": { "type": "boolean" },
@@ -63,6 +77,15 @@
             "type": "string",
             "enum": ["flat", "grouped", "auto"]
           },
+          "slugMode": {
+            "type": "string",
+            "enum": ["preserve", "integ"]
+          },
+          "attribution": {
+            "type": "string",
+            "enum": ["none", "section"]
+          },
+          "groupReadme": { "type": "string" },
           "include": {
             "type": "array",
             "items": { "type": "string" }

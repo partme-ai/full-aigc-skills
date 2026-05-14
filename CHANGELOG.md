@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 - 2026-05-14
+
+- Vendor `pippit-skills` from Gitee with preserved upstream README and skill layout.
+- Extend external sync to support `remoteUrl`, `slugMode`, `groupReadme`, and `--source`.
+
 ## 0.2.0 - 2026-05-14
 
 - Adopt grouped skill layout aligned with `full-stack-skills`.

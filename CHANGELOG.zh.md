@@ -1,5 +1,10 @@
 # 更新日志
 
+## 0.3.0 - 2026-05-14
+
+- 从 Gitee 同步 `pippit-skills`，保留上游 README 与技能目录结构。
+- 外部同步支持 `remoteUrl`、`slugMode`、`groupReadme` 与 `--source`。
+
 ## 0.2.0 - 2026-05-14
 
 - 采用与 `full-stack-skills` 一致的分组目录结构。

@@ -10,6 +10,8 @@
     "audit": "node ./scripts/audit-skills.mjs",
     "sync:external": "node ./scripts/sync-external-skills.mjs",
     "sync:external:dry": "node ./scripts/sync-external-skills.mjs --dry-run",
+    "sync:pippit": "node ./scripts/sync-external-skills.mjs --source pippit",
+    "sync:pippit:dry": "node ./scripts/sync-external-skills.mjs --source pippit --dry-run",
     "inventory": "node ./scripts/build-inventory.mjs"
   }
 }

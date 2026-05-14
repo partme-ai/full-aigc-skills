@@ -7,6 +7,7 @@
 | 组目录名 | 技能名列表 | 数量 | 平台/类别 | 说明 |
 |----------|------------|------|-----------|------|
 | **jimeng-skills** | jimeng-cli-image2image, jimeng-cli-image2video, jimeng-cli-text2image, jimeng-cli-text2video, jimeng-prompt-image2image, jimeng-prompt-image2video, jimeng-prompt-text2image, jimeng-prompt-text2video | 8 | jimeng / generic | 即梦提示词与 CLI 生成技能 |
+| **pippit-skills** | xyq-nest-skill | 1 | generic | 小云雀 / Pippit 会话式生图生视频技能，组根目录保留上游 `README.md` |
 
 ## 规划中的组
 

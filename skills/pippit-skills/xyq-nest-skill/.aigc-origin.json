@@ -1,0 +1,24 @@
+{
+  "sourceId": "pippit",
+  "repo": "https://gitee.com/Pippit-dev/pippit-skills.git",
+  "remoteUrl": "https://gitee.com/Pippit-dev/pippit-skills.git",
+  "ref": "master",
+  "commit": "72c57fffd28e53db7422930666e9cd83c9054b13",
+  "upstreamPath": "skills/xyq-nest-skill",
+  "upstreamSlug": "xyq-nest-skill",
+  "targetGroup": "pippit-skills",
+  "vendoredSlug": "xyq-nest-skill",
+  "slugMode": "preserve",
+  "attribution": "none",
+  "license": "MIT",
+  "platforms": [
+    "generic"
+  ],
+  "categories": [
+    "content",
+    "video",
+    "image"
+  ],
+  "syncedAt": "2026-05-14T15:09:55.241Z",
+  "fingerprint": "f797670cf8a0a8bb6713a66e6ab2912cef9498cd935b73f424182f2deed667d2"
+}

@@ -5,10 +5,28 @@ import {
   buildVendoredSlug,
   globToRegExp,
   matchesAnyPattern,
+  resolveSourceRemote,
   resolveTargetGroup,
 } from "./integration-utils.mjs";
 
-test("buildVendoredSlug prefixes integrated skills", () => {
+test("buildVendoredSlug preserves upstream names when configured", () => {
+  assert.equal(
+    buildVendoredSlug("pippit", "xyq-nest-skill", {}, { slugMode: "preserve" }),
+    "xyq-nest-skill",
+  );
+});
+
+test("resolveSourceRemote supports gitee remotes", () => {
+  assert.equal(
+    resolveSourceRemote({
+      id: "pippit",
+      remoteUrl: "https://gitee.com/Pippit-dev/pippit-skills.git",
+    }),
+    "https://gitee.com/Pippit-dev/pippit-skills.git",
+  );
+  assert.equal(resolveSourceRemote({ id: "baoyu", repo: "JimLiu/baoyu-skills" }), "https://github.com/JimLiu/baoyu-skills.git");
+});
+test("buildVendoredSlug prefixes integrated skills by default", () => {
   assert.equal(buildVendoredSlug("baoyu", "baoyu-post-to-wechat"), "integ-baoyu-baoyu-post-to-wechat");
   assert.equal(
     buildVendoredSlug("baoyu", "baoyu-post-to-wechat", {
