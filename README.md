@@ -2,7 +2,13 @@
 
 [中文](./README.zh.md) | English
 
-Curated AIGC skills for multi-platform content creation, publishing, and media generation. The repository hosts first-party skills and periodically syncs external skill sources.
+Curated skills for **domestic (China) AIGC generation platforms**: first-party platform integrations and prompt skills, plus optional sync from public upstream repos. Skills live under `skills/<group>-skills/<skill-name>/`.
+
+## Scope and boundaries
+
+- **This repo**: image, music, video, and related generation skills for domestic platforms (e.g. Jimeng, MiniMax, Pippit / 小云雀).
+- **[baoyu-skills](https://github.com/JimLiu/baoyu-skills)**: a separate skill ecosystem—install and use it directly; **do not** merge it here or add it to `sources.conf`.
+- **Overseas or generic creative tooling** (e.g. Remotion): only on explicit need, not the default expansion path.
 
 ## Goals
 
