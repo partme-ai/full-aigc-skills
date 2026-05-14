@@ -1,98 +1,63 @@
 ---
 name: jimeng-opencli-image2image
-description: Plan and verify Jimeng image-to-image workflows alongside opencli browser session tools. opencli jimeng currently exposes text-to-image generate only; this skill maps jimeng-prompt-image2image outputs to dreamina image2image CLI execution while using opencli for login checks, workspace organization, and post-generation history. Use when the user has reference images and an approved edit prompt and prefers opencli session context with dreamina CLI for the actual edit job.
+description: Guide Jimeng image-to-image for standard members without dreamina CLI. opencli jimeng has no image2image subcommand; only generate, history, new, and workspaces are allowed. Use with jimeng-prompt-image2image for edit prompts, manual reference upload on the Jimeng web UI in the same browser session, and opencli history for verification. Never invoke dreamina or jimeng-cli execution skills.
 license: Complete terms in LICENSE.txt
 ---
 
-# jimeng-opencli-image2image — 即梦图生图 opencli 编排
+# jimeng-opencli-image2image — 即梦图生图（opencli / 普通会员）
 
-编排**图生图**流程：用 **opencli** 维护即梦网页登录态、工作区与生成历史；**实际图生图提交**在 opencli 尚未提供 `jimeng image2image` 子命令时，与 `jimeng-cli-image2image` 相同，使用 **`dreamina image2image`**。本技能不写编辑 prompt（先用 `jimeng-prompt-image2image`）。
+面向**无 dreamina CLI** 的普通会员。本技能**仅允许** `opencli jimeng` 已注册的子命令，**禁止** `dreamina`、`jimeng-cli-image2image` 及任何 dreamina 安装说明。
 
-## 能力边界（opencli 上游）
+编辑 prompt 由 `jimeng-prompt-image2image` 提供；图生图**上传与点击生成**在即梦网页完成（与 opencli 共用同一 Chrome 登录态）。
 
-`opencli jimeng` 当前注册：`generate`（文生图）、`history`、`new`、`workspaces`。**无**图生图专用命令。本技能在 opencli 补齐前采用 **opencli 会话 + dreamina 图生图** 组合。
+## opencli 能力边界
 
-## 与 jimeng-cli-image2image 的对照
+`opencli jimeng` 当前**没有** `image2image` 子命令。`generate` 仅文生图（`type=image`），**不能**代替参考图上传。
 
-| 步骤 | jimeng-opencli-image2image | jimeng-cli-image2image |
-|------|----------------------------|-------------------------|
-| 浏览器登录检查 | `opencli jimeng history` 或打开即梦确认 | `dreamina user_credit` |
-| 提交图生图 | `dreamina image2image --images … --poll=0` | 同左 |
-| 任务轮询 | `dreamina query_result`（智能体约 5 秒一次） | 同左 |
-| 历史核对 | `opencli jimeng history` | `dreamina list_task` |
-
-参数语义（`--images`、`--model_version` 4.0+、`--resolution_type` 2k/4k、`--poll`）与 `jimeng-cli-image2image` 一致。
-
-## When to use
-
-- 用户有 1–10 张本地参考图与已审核的图生图 prompt
-- 希望用 opencli 确认**网页会话**仍有效，再用 dreamina 提交图生图
-- 用户提到图生图 + opencli / Browser Bridge
-
-Do NOT use for:
-
-- 纯文生图 → `jimeng-opencli-text2image`
-- 仅 dreamina CLI、不需要 opencli → `jimeng-cli-image2image`
-- 视频 → `jimeng-opencli-image2video` / `jimeng-cli-image2video`
+| 子命令 | 本技能中的用途 |
+|--------|----------------|
+| `history` | 提交后核对是否出现新作品、prompt、缩略图 |
+| `new` | 为单次编辑任务新建 workspace |
+| `workspaces` | 查找/确认工作区 |
+| `generate` | **不用于**典型图生图（无 `--images`）；勿把文生图当图生图 |
 
 ## 核心流程
 
 ```
-1. SESSION → opencli jimeng history --limit 3（或浏览器打开即梦确认登录）
-2. VERIFY  → 本地参考图路径可读（1–10 张，逗号分隔）
-3. SUBMIT  → dreamina image2image --images <paths> --prompt="..." --model_version=5.0 --poll=0
-4. POLL    → 智能体每 ~5s：dreamina query_result --submit_id=<id>
-5. AUDIT   → 可选 opencli jimeng history 对照网页记录
+1. PROMPT  → jimeng-prompt-image2image 定稿（Keep/Change）
+2. SESSION → 可选 opencli jimeng new；或 workspaces 确认工作区
+3. MANUAL  → 用户在即梦网页：上传 1–10 张参考图，粘贴 prompt，选择模型/分辨率，点击生成
+4. VERIFY  → opencli jimeng history --limit N 对照 prompt、status、image_url
+5. RETRY   → 未出现新记录则提示检查积分、合规或延长等待后再次 history
 ```
 
-## 提交示例
+## 允许的 opencli 示例
 
 ```bash
-opencli jimeng history --limit 5
-
-dreamina image2image \
-  --images ./photo.png \
-  --prompt="保持人物面部与姿势不变，改为吉卜力手绘风格" \
-  --model_version=5.0 \
-  --resolution_type=4k \
-  --poll=0
+opencli jimeng new
+opencli jimeng workspaces
+opencli jimeng history --limit 10 --format table
 ```
 
-多参考图：
+## 禁止事项
 
-```bash
-dreamina image2image \
-  --images ./subject.png,./style.png \
-  --prompt="保留第一张人物与构图，套用第二张水墨风格" \
-  --poll=0
-```
+- 不得执行 `dreamina image2image`、`dreamina user_credit`、`dreamina query_result` 等。
+- 不得引导用户安装 dreamina CLI 作为回退。
+- 不得虚构 `opencli jimeng image2image` 或带 `--images` 的 generate。
 
-## 参数速查
+## 与 jimeng-cli-image2image
 
-| 参数 | 必填 | 说明 |
-|------|------|------|
-| `--images` | 是 | 1–10 个本地路径，逗号分隔 |
-| `--prompt` | 是 | Keep/Change 式编辑描述（中文优先） |
-| `--model_version` | 否 | 4.0、4.1、4.5、5.0；图生图不支持 3.x |
-| `--resolution_type` | 否 | 2k / 4k（图生图无 1k） |
-| `--poll` | 否 | `0` 异步 + 智能体轮询 `query_result` |
+已开通 dreamina CLI / 高级会员且可本地提交图生图任务时，改用 `jimeng-cli-image2image`；本技能用户**不要**混用。
 
-## 智能体轮询 SOP
+## 智能体规范
 
-与 `jimeng-cli-image2image` 相同：禁止 shell `while true`；根据 `gen_status` 为 `success` / `failed` / `querying` 分支；图片类任务长时间无进展（约 3 分钟）主动询问用户。
-
-## 常见错误
-
-| 错误 | 处理 |
-|------|------|
-| opencli history 失败 | 修复 Chrome 登录与 Browser Bridge |
-| `dreamina: command not found` | 安装 dreamina CLI 或改走 `jimeng-cli-image2image` |
-| 图片路径不存在 | 改为绝对路径并先 `ls` 验证 |
-| 模型 &lt; 4.0 | 图生图仅 4.0+ |
+- 明确区分：prompt 由 prompt 技能负责；参考图上传与生成按钮由用户在网页完成；opencli 只做会话与历史验收。
+- `history` 中 `status` 为 `completed` 表示网页侧完成；`pending` 时稍后重查。
+- 若用户坚持「全自动图生图」且拒绝网页操作：说明 opencli 上游尚无对应子命令，可记录需求，**仍不得**改用 dreamina。
 
 ## Gotchas
 
-1. **opencli 不能替代 `--images` 上传**；图生图仍依赖 dreamina CLI 或网页手动上传。
-2. 编辑 prompt 必须经 `jimeng-prompt-image2image`；未描述区域可能被模型改写。
-3. opencli 与 dreamina 是两套鉴权；仅 history 不能代替 `user_credit`。
-4. 上游若新增 `opencli jimeng image2image`，优先改用该命令并收缩 dreamina 回退。
+1. 普通会员路径依赖网页图生图能力；opencli 不能上传本地文件。
+2. 多参考图、2k/4k、4.0+ 模型均在网页选择，与 prompt 技能建议一致即可。
+3. 编辑 prompt 应用 Keep/Change，避免未描述区域被改写。
+4. 仅 `history` 不能代替生成；无新记录时先确认用户是否已在网页点击生成。

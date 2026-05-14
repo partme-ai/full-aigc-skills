@@ -1,106 +1,62 @@
 ---
 name: jimeng-opencli-text2video
-description: Plan and verify Jimeng text-to-video workflows with opencli browser session tools plus dreamina text2video CLI execution. opencli jimeng has no dedicated video generate command yet; use opencli for session and history checks and dreamina for Seedance submission and query_result polling. Pair with jimeng-prompt-text2video for motion prompts. Use when the user wants opencli session context with CLI-based video generation.
+description: Guide Jimeng text-to-video for standard members without dreamina CLI. opencli jimeng exposes only generate, history, new, and workspaces; no text2video command. Use with jimeng-prompt-text2video for motion prompts, manual text-to-video on the Jimeng web UI, and opencli history to verify results. Never invoke dreamina or jimeng-cli execution skills.
 license: Complete terms in LICENSE.txt
 ---
 
-# jimeng-opencli-text2video — 即梦文生视频 opencli 编排
+# jimeng-opencli-text2video — 即梦文生视频（opencli / 普通会员）
 
-编排**文生视频**：**opencli** 维护即梦网页登录与工作区；**视频任务提交**在 opencli 未提供 `jimeng text2video` 前，与 `jimeng-cli-text2video` 一致，使用 **`dreamina text2video`** + **`query_result`**。本技能不写视频 prompt（先用 `jimeng-prompt-text2video`）。
+面向**无 dreamina CLI** 的普通会员。仅允许 `opencli jimeng` 子命令，**禁止** `dreamina text2video`、`query_result` 及 `jimeng-cli-text2video`。
 
-## 能力边界（opencli 上游）
+视频 prompt 由 `jimeng-prompt-text2video` 提供；**文生视频提交**在即梦网页「视频 / Seedance」流程中由用户完成（与 opencli 同一浏览器会话）。
 
-`opencli jimeng` 现有：`generate`（文生图）、`history`、`new`、`workspaces`。**无**文生视频命令。视频生成走 dreamina CLI；opencli 用于会话与历史核对。
+## opencli 能力边界
 
-## 与 jimeng-cli-text2video 的对照
+| 子命令 | 本技能中的用途 |
+|--------|----------------|
+| `history` | 生成后核对作品、prompt、状态 |
+| `new` / `workspaces` | 按项目拆分会话 |
+| `generate` | **不用于**文生视频（固定 `type=image` 文生图页） |
 
-| 步骤 | jimeng-opencli-text2video | jimeng-cli-text2video |
-|------|--------------------------|------------------------|
-| 会话 / 登录 | `opencli jimeng history` 等 | `dreamina user_credit` |
-| 提交 | `dreamina text2video --prompt … --poll=0` | 同左 |
-| 轮询 | 智能体约 5s 调用 `query_result` | 同左 |
-| 历史 | `opencli jimeng history`（网页侧） | `dreamina list_task` |
-
-时长、画幅、Seedance 模型、`--poll` 语义与 `jimeng-cli-text2video` 一致。
-
-## When to use
-
-- 用户有已审核的文生视频 prompt（含动作与镜头描述）
-- 需要 opencli 确认浏览器即梦会话，再用 dreamina 提交视频
-- 用户提到 opencli + 即梦生视频 / Seedance
-
-Do NOT use for:
-
-- 图生视频 → `jimeng-opencli-image2video`
-- 静态图 → `jimeng-opencli-text2image`
-- 仅 dreamina、不用 opencli → `jimeng-cli-text2video`
+无 `opencli jimeng text2video`、`--duration`、`--model_version=seedance*` 等参数。
 
 ## 核心流程
 
 ```
-1. SESSION → opencli jimeng history --limit 3
-2. CREDIT  → dreamina user_credit（视频耗积分高于图片）
-3. SUBMIT  → dreamina text2video --prompt="..." --duration=N --ratio=16:9 --model_version=... --poll=0
-4. POLL    → 智能体每 ~5s：dreamina query_result --submit_id=<id>（视频可等 2–15 分钟）
-5. AUDIT   → 可选 opencli jimeng history
+1. PROMPT  → jimeng-prompt-text2video（动作 + 镜头 + 时长建议）
+2. SESSION → 可选 opencli jimeng new
+3. MANUAL  → 用户在即梦网页选择文生视频，粘贴 prompt，设置时长/画幅/模型，点击生成
+4. VERIFY  → opencli jimeng history --limit N（视频可能较久，可间隔多次查询）
+5. REPORT  → 根据 history 或用户反馈汇报结果；pending 时说明继续等待
 ```
 
-## 提交示例
+## 允许的 opencli 示例
 
 ```bash
+opencli jimeng new
+opencli jimeng workspaces
 opencli jimeng history --limit 5
-dreamina user_credit
-
-dreamina text2video \
-  --prompt="镜头缓缓推进，女孩在森林中缓步，裙摆轻摆，阳光穿过树冠" \
-  --duration=8 \
-  --ratio=16:9 \
-  --model_version=seedance2.0fast_vip \
-  --poll=0
+opencli jimeng history --limit 10 --format json
 ```
 
-快速试跑（CLI 内短轮询）：
+## 禁止事项
 
-```bash
-dreamina text2video --prompt="..." --duration=5 --poll=120
-```
+- 不得使用 dreamina CLI 提交或轮询视频任务。
+- 不得建议 `seedance2.0fast_vip` 等仅 CLI 文档中的 VIP 通道参数（除非用户在网页自行选择）。
+- 不得用 `generate` 冒充视频生成。
 
-## 参数速查
+## 与 jimeng-cli-text2video
 
-| 参数 | 默认 | 说明 |
-|------|------|------|
-| `--prompt` | — | 必填；动作 + 镜头 |
-| `--duration` | 5 | 4–15 秒 |
-| `--ratio` | 16:9 | 1:1、3:4、16:9、4:3、9:16、21:9 |
-| `--video_resolution` | 720P | Seedance 2.0 |
-| `--model_version` | seedance2.0fast | 含 `seedance2.0fast_vip` 等 |
-| `--poll` | 0 | 0 为异步 + 智能体轮询 |
+已开通 dreamina CLI 的用户使用 `jimeng-cli-text2video`；本技能读者**不得**改用 dreamina。
 
-## 模型选择（与 CLI 技能一致）
+## 智能体规范
 
-| 模型 | 特点 |
-|------|------|
-| seedance2.0fast / seedance2.0fast_vip | 迭代快，默认首选 |
-| seedance2.0 / seedance2.0_vip | 质量更高，更慢 |
-
-VIP 账户优先 `*_vip` 通道（与 `jimeng-cli-text2video` 一致）。
-
-## 智能体轮询 SOP
-
-禁止 shell 死循环；`querying` 时告知用户视频通常需数分钟；超过约 20 分钟仍无结果则询问是否继续。
-
-## 常见错误
-
-| 错误 | 处理 |
-|------|------|
-| 积分不足 | `user_credit` 后提示充值或缩短 `--duration` |
-| `AigcComplianceConfirmationRequired` | 网页授权模型后重试 |
-| opencli history 失败 | 检查 Chrome 登录与 Bridge |
-| `--poll` 超时返回 querying | 用 `query_result` 继续轮询 |
+- 视频耗时长：多次 `history` 属正常，禁止 shell 死循环；由智能体分轮调用 `history`。
+- 时长与动作复杂度匹配（见 prompt 技能）；网页侧由用户选择秒数。
+- 积分不足、合规拦截在网页提示，opencli 无法 `user_credit` 查询。
 
 ## Gotchas
 
-1. 视频积分远高于图片；提交前必须 `user_credit`。
-2. opencli **不能**代替 `dreamina text2video` 提交 Seedance 任务。
-3. 时长与动作复杂度要匹配（见 `jimeng-cli-text2video` 时长表）。
-4. 上游若提供 `opencli jimeng text2video`，优先改用并更新本技能。
+1. `history` 列主要为图生历史接口字段，视频条目以网页实际展示为准；无记录时以用户浏览器状态为准。
+2. 普通会员以网页套餐与排队为准，与 dreamina VIP 队列无关。
+3. 全自动文生视频需等 opencli 上游新增视频子命令；当前不得 dreamina 回退。

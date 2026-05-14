@@ -1,128 +1,72 @@
 ---
 name: jimeng-opencli-image2video
-description: Plan and verify Jimeng image-to-video workflows across image2video, frames2video, multiframe2video, and multimodal2video modes. opencli jimeng provides browser session helpers only; actual submission uses dreamina CLI with the same routing as jimeng-cli-image2video. Pair with jimeng-prompt-image2video for incremental motion prompts. Use when reference media exists and the user wants opencli session checks plus CLI video generation.
+description: Guide Jimeng image-to-video for standard members without dreamina CLI. opencli jimeng has no image2video, frames2video, or multimodal subcommands. Use with jimeng-prompt-image2video for incremental motion prompts, manual mode selection on the Jimeng web UI, and opencli history for verification. Never invoke dreamina or jimeng-cli execution skills.
 license: Complete terms in LICENSE.txt
 ---
 
-# jimeng-opencli-image2video — 即梦图生视频 opencli 编排
+# jimeng-opencli-image2video — 即梦图生视频（opencli / 普通会员）
 
-编排**图生视频**及多参考模式：用 **opencli** 检查即梦网页会话与历史；**视频提交**在 opencli 未提供视频子命令前，与 `jimeng-cli-image2video` 相同，按输入类型选择 **`dreamina image2video` / `frames2video` / `multiframe2video` / `multimodal2video`**。本技能不写视频 prompt（先用 `jimeng-prompt-image2video`）。
+面向**无 dreamina CLI** 的普通会员。仅允许 `opencli jimeng` 子命令，**禁止** `dreamina image2video`、`frames2video`、`multiframe2video`、`multimodal2video` 及 `jimeng-cli-image2video`。
 
-## 能力边界（opencli 上游）
+增量运动 prompt 由 `jimeng-prompt-image2video` 提供；**图生视频 / 首尾帧 / 分镜 / 全能参考**在即梦网页由用户选择模式并上传素材后生成。
 
-`opencli jimeng` 仅有 `generate`（文生图）、`history`、`new`、`workspaces`。**无**图生视频命令。本地媒体上传与 Seedance 提交走 dreamina CLI。
+## opencli 能力边界
 
-## 模式路由（与 jimeng-cli-image2video 一致）
+| 子命令 | 本技能中的用途 |
+|--------|----------------|
+| `history` | 任务完成后核对历史记录 |
+| `new` / `workspaces` | 会话管理 |
+| `generate` | 不用于图生视频 |
 
-| 输入 | dreamina 子命令 |
-|------|-----------------|
-| 1 张图 | `image2video --image` |
-| 首尾 2 帧 | `frames2video --first --last` |
-| 2–20 张分镜 | `multiframe2video --images` |
-| 图 + 视频 + 音频 | `multimodal2video --image/--video/--audio` |
+opencli **无**按输入自动路由的子命令（无 `--image`、`--first`/`--last`、`--images` 等）。
 
-## 与 jimeng-cli-image2video 的对照
+## 网页模式与 prompt 技能对齐
 
-| 步骤 | jimeng-opencli-image2video | jimeng-cli-image2video |
-|------|----------------------------|-------------------------|
-| 会话 | `opencli jimeng history` | `dreamina user_credit` |
-| 模式选择 | 同左表 | 同左表 |
-| 提交 | 对应 dreamina 子命令 + `--poll=0` | 同左 |
-| 轮询 | `query_result`（约 5s） | 同左 |
+| 用户输入 | 网页侧（用户操作） | prompt 技能要点 |
+|----------|-------------------|-----------------|
+| 单张图 | 图生视频，上传 1 张 | 只写运动增量 |
+| 首尾 2 张 | 首尾帧 / 过渡 | 描述过渡过程 |
+| 多张分镜 | 多帧 / 故事板 | 叙事 + 转场 |
+| 图 + 音视频 | 全能参考 / 多模态 | 合成关系说明 |
 
-## When to use
-
-- 用户有参考图/音视频与已审核的**增量**运动 prompt
-- 需要 opencli 确认网页登录后再用 dreamina 动图/视频
-- 用户提到图生视频、首尾帧、分镜、全能参考 + opencli
-
-Do NOT use for:
-
-- 纯文生视频 → `jimeng-opencli-text2video`
-- 静态图 → `jimeng-opencli-text2image` / `jimeng-opencli-image2image`
-- 仅 dreamina → `jimeng-cli-image2video`
+路由在**网页**完成；智能体用 prompt 技能协助文案，用 opencli 做会话与验收。
 
 ## 核心流程
 
 ```
-1. SESSION → opencli jimeng history --limit 3
-2. CREDIT  → dreamina user_credit
-3. DETECT  → 按输入数量/类型选子命令
-4. VERIFY  → 本地文件存在（opencli 不负责上传）
-5. SUBMIT  → dreamina <subcommand> ... --poll=0
-6. POLL    → query_result（视频等待可长达 15+ 分钟）
+1. PROMPT  → jimeng-prompt-image2video
+2. SESSION → 可选 opencli jimeng new
+3. MANUAL  → 用户在即梦网页选模式、上传本地素材、粘贴 prompt、生成
+4. VERIFY  → opencli jimeng history --limit N（视频等待可长达十余分钟，分轮查询）
+5. REPORT  → 无自动化 submit_id；以 history + 用户确认交付
 ```
 
-## 提交示例
-
-**单图：**
+## 允许的 opencli 示例
 
 ```bash
-opencli jimeng history --limit 5
-dreamina user_credit
-
-dreamina image2video \
-  --image ./photo.png \
-  --prompt="微风拂动头发与衣角，缓慢眨眼，镜头轻推" \
-  --model_version=seedance2.0fast_vip \
-  --poll=0
+opencli jimeng new
+opencli jimeng workspaces
+opencli jimeng history --limit 10
 ```
 
-**首尾帧：**
+## 禁止事项
 
-```bash
-dreamina frames2video \
-  --first ./start.png --last ./end.png \
-  --prompt="花瓣由含苞到盛开，外层先展" \
-  --duration=10 \
-  --poll=0
-```
+- 不得调用任何 dreamina 视频子命令或 `query_result` 轮询。
+- 不得虚构 opencli 图生视频参数。
+- 不得引导安装 dreamina。
 
-**分镜：**
+## 与 jimeng-cli-image2video
 
-```bash
-dreamina multiframe2video \
-  --images ./f1.png,./f2.png,./f3.png \
-  --prompt="情绪由沉思到惊喜再到急切" \
-  --transition-prompt="平滑过渡" \
-  --duration=15 \
-  --poll=0
-```
+已开通 dreamina CLI 的用户用 `jimeng-cli-image2video` 做子命令路由与轮询；本技能用户**不得**改用。
 
-**全能参考：**
+## 智能体规范
 
-```bash
-dreamina multimodal2video \
-  --image ./person.png,./scene.png \
-  --audio ./voice.mp3 \
-  --prompt="人物按音频节奏说话，口型同步" \
-  --model_version=seedance2.0fast_vip \
-  --poll=0
-```
-
-## 参数注意
-
-- `image2video` 用 `--image`（单数）；`multiframe2video` 用 `--images`（复数）；`frames2video` 用 `--first` / `--last`。
-- `multiframe2video` 通常不支持 `--model_version` 覆盖（与 CLI 技能一致）。
-- `multimodal2video` 最多约 9 图 + 3 视频 + 3 音频。
-- prompt 只描述**运动增量**，不重复画面静态内容。
-
-## 智能体轮询 SOP
-
-与 `jimeng-cli-image2video` 相同：禁止 shell 死循环；视频 `querying` 时设置用户预期；约 20 分钟无进展则询问是否继续。
-
-## 常见错误
-
-| 错误 | 处理 |
-|------|------|
-| 子命令与输入不匹配 | 重新按模式路由表选择 |
-| 文件不存在 | 校验路径；多文件逗号分隔无空格 |
-| opencli 与 dreamina 鉴权不一致 | 分别修复网页登录与 `dreamina login` |
-| 超出 multimodal 上限 | 减少参考文件数量 |
+- prompt 只描述**动起来**的部分，不重复画面静态内容。
+- 分轮 `history` 验收，禁止 shell 死循环。
+- 素材须由用户在网页上传；opencli 不能代替 `--image` 上传。
 
 ## Gotchas
 
-1. opencli **不能**上传本地图/视频/音频；dreamina 子命令需要本地路径。
-2. Seedance 2.0 默认 **720P**；1080P 多见于旧版 3.x 模型路径。
-3. VIP 账户默认 `seedance2.0fast_vip`（与 CLI 技能一致）。
-4. 上游若增加 `opencli jimeng image2video` 等，优先迁移并缩小 dreamina 回退范围。
+1. 单图 / 首尾帧 / 分镜 / 多模态能力边界以即梦网页为准，与 CLI 技能表格概念对齐但**执行面不同**。
+2. 普通会员排队与积分以网页为准。
+3. 上游若增加 `opencli jimeng image2video` 等，再更新本技能；此前不得 dreamina 回退。
