@@ -1,0 +1,11 @@
+{
+  "sourceId": "remotion",
+  "remote": "https://github.com/remotion-dev/skills.git",
+  "ref": "main",
+  "commit": "277510e78245ac0fa275d7cb6520d52e0ac2e212",
+  "targetGroup": "remotion-skills",
+  "skill": "remotion",
+  "upstreamSkill": "remotion",
+  "slugMode": "preserve",
+  "syncedAt": "2026-05-14T15:19:42Z"
+}

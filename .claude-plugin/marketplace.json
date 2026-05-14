@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "AIGC skills for multi-platform content creation, publishing, and media generation",
-    "version": "0.4.1"
+    "version": "0.4.2"
   },
   "plugins": [
     {
@@ -43,6 +43,15 @@
         "./skills/minimax-skills/minimax-multimodal-toolkit",
         "./skills/minimax-skills/minimax-music-gen",
         "./skills/minimax-skills/minimax-music-playlist"
+      ]
+    },
+    {
+      "name": "remotion-skills",
+      "description": "Remotion video creation best practices for React-based compositions",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/remotion-skills/remotion"
       ]
     }
   ]

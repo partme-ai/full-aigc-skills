@@ -15,6 +15,7 @@ id|remote|ref|target_group|layout|slug_mode|group_readme|include
 ```text
 pippit|https://gitee.com/Pippit-dev/pippit-skills.git|master|pippit-skills|flat|preserve|README.md|
 minimax|https://github.com/MiniMax-AI/skills.git|main|minimax-skills|flat|preserve|README.md|minimax-multimodal-toolkit,minimax-music-gen,minimax-music-playlist
+remotion|https://github.com/remotion-dev/skills.git|main|remotion-skills|auto|preserve|README.md|
 ```
 
 `include` 为逗号分隔的技能目录名（与上游 `skills/<name>/` 或 flat 布局下的 `<name>/` 一致）。留空表示导入该来源的全部技能；填写后只同步列出的技能，适合上游仓库很大、但 marketplace 只需要其中几项的场景。
