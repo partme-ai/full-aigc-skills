@@ -65,3 +65,4 @@ npx skills add <owner>/aigc-skills
 
 - `jimeng-skills`：即梦提示词与 CLI 生成技能
 - `pippit-skills`：小云雀 / Pippit 会话技能，组根目录保留上游 README
+- `minimax-skills`：MiniMax 多模态与音乐技能（仅同步配置中列出的 3 个技能）

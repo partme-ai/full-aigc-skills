@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "AIGC skills for multi-platform content creation, publishing, and media generation",
-    "version": "0.4.0"
+    "version": "0.4.1"
   },
   "plugins": [
     {
@@ -32,6 +32,17 @@
       "strict": false,
       "skills": [
         "./skills/pippit-skills/xyq-nest-skill"
+      ]
+    },
+    {
+      "name": "minimax-skills",
+      "description": "MiniMax multimodal and music generation skills",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/minimax-skills/minimax-multimodal-toolkit",
+        "./skills/minimax-skills/minimax-music-gen",
+        "./skills/minimax-skills/minimax-music-playlist"
       ]
     }
   ]
