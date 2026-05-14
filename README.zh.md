@@ -69,7 +69,7 @@ npx skills add <owner>/aigc-skills
 
 ## 当前分组
 
-- `jimeng-skills`：即梦提示词与 CLI 生成技能
+- `jimeng-skills`：即梦提示词、dreamina CLI 与 opencli 浏览器编排（`jimeng-cli-*` / `jimeng-opencli-*`）
 - `pippit-skills`：小云雀 / Pippit 会话技能，组根目录保留上游 README
 - `minimax-skills`：MiniMax 多模态与音乐技能（仅同步配置中列出的 3 个技能）
 - `remotion-skills`：Remotion 视频创作最佳实践（来自 [remotion-dev/skills](https://github.com/remotion-dev/skills)）

@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Domestic China AIGC generation platform skills for image, music, and video workflows",
-    "version": "0.4.2"
+    "version": "0.4.3"
   },
   "plugins": [
     {
@@ -19,6 +19,10 @@
         "./skills/jimeng-skills/jimeng-cli-image2video",
         "./skills/jimeng-skills/jimeng-cli-text2image",
         "./skills/jimeng-skills/jimeng-cli-text2video",
+        "./skills/jimeng-skills/jimeng-opencli-image2image",
+        "./skills/jimeng-skills/jimeng-opencli-image2video",
+        "./skills/jimeng-skills/jimeng-opencli-text2image",
+        "./skills/jimeng-skills/jimeng-opencli-text2video",
         "./skills/jimeng-skills/jimeng-prompt-image2image",
         "./skills/jimeng-skills/jimeng-prompt-image2video",
         "./skills/jimeng-skills/jimeng-prompt-text2image",
