@@ -33,5 +33,4 @@
 
 1. 新增组时，在 `.claude-plugin/marketplace.json` 增加一个插件条目（推荐一组一插件）。
 2. 更新本表后再登记 marketplace 路径。
-3. 执行 `npm run audit` 检查磁盘、marketplace 与本表是否一致。
-4. 执行 `npm run inventory` 刷新平台覆盖清单。
+3. 执行 `./scripts/sync-sources.sh` 检查磁盘、marketplace 与本表是否一致。

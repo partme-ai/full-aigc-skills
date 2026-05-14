@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0 - 2026-05-14
+
+- Replace Node-based external sync with a single Bash script and `config/sources.conf`.
+
 ## 0.3.0 - 2026-05-14
 
 - Vendor `pippit-skills` from Gitee with preserved upstream README and skill layout.

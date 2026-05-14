@@ -53,6 +53,3 @@ skills/wechat-skills/aigc-wechat-article-draft/
 
 1. Register the skill path in `.claude-plugin/marketplace.json`.
 2. Update `docs/aigc-skill-group-mapping.md`.
-3. Run `npm run audit`.
-4. Run `npm run inventory`.
-5. Update `README.md` and `README.zh.md` if the skill is user-facing.

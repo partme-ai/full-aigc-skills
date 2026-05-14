@@ -1,5 +1,9 @@
 # 更新日志
 
+## 0.4.0 - 2026-05-14
+
+- 外部技能同步改为单个 Bash 脚本与 `config/sources.conf` 配置。
+
 ## 0.3.0 - 2026-05-14
 
 - 从 Gitee 同步 `pippit-skills`，保留上游 README 与技能目录结构。
