@@ -1,6 +1,8 @@
 # Platform Coverage
 
-`npm run inventory` writes `integrations/inventory.json` and groups skills by platform keywords.
+`npm run inventory` writes `integrations/inventory.json` and groups skills by platform keywords and source metadata.
+
+Inventory paths use grouped entries such as `jimeng-skills/jimeng-prompt-text2image`.
 
 | Platform | Keyword examples |
 |----------|------------------|
@@ -15,6 +17,7 @@
 | LinkedIn | linkedin |
 | Kuaishou | kuaishou, 快手 |
 | Zhihu | zhihu, 知乎 |
-| Generic AIGC | markdown, image, video, audio, translate, infographic, slide |
+| Jimeng | jimeng, 即梦, seedance, seedream |
+| Generic AIGC | markdown, image, video, audio, translate, infographic, slide, prompt |
 
-Use `platforms` in `config/external-sources.json` to annotate upstream repositories even before skills are imported.
+Use `platforms` in `config/external-sources.json` to annotate upstream repositories before skills are imported.

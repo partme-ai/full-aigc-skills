@@ -5,6 +5,7 @@ import {
   buildVendoredSlug,
   globToRegExp,
   matchesAnyPattern,
+  resolveTargetGroup,
 } from "./integration-utils.mjs";
 
 test("buildVendoredSlug prefixes integrated skills", () => {
@@ -15,6 +16,11 @@ test("buildVendoredSlug prefixes integrated skills", () => {
     }),
     "integ-baoyu-wechat-publish",
   );
+});
+
+test("resolveTargetGroup uses source override", () => {
+  assert.equal(resolveTargetGroup({ id: "baoyu", targetGroup: "publish-skills" }), "publish-skills");
+  assert.equal(resolveTargetGroup({ id: "baoyu" }), "integ-baoyu-skills");
 });
 
 test("matchesAnyPattern supports globs", () => {

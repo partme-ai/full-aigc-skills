@@ -1,37 +1,38 @@
 # CLAUDE.md
 
-AIGC skill marketplace for first-party and curated third-party skills. Version: **0.1.0**.
+AIGC skill marketplace for first-party and curated third-party skills. Version: **0.2.0**.
 
 ## Architecture
 
 | Area | Description |
 |------|-------------|
-| First-party skills | `skills/aigc-*` authored in this repository |
-| Integrated skills | `skills/integ-*` vendored from `config/external-sources.json` |
+| Grouped skills | `skills/<group>-skills/<skill-name>/SKILL.md` |
+| First-party skills | Authored under platform/vendor groups, usually prefixed with `aigc-` |
+| Integrated skills | Vendored under `skills/integ-<source>-skills/integ-*` |
 | Shared packages | `packages/*` for reusable runtime code |
 | Integration metadata | `integrations/manifest.json`, `integrations/inventory.json` |
 
-All published skills are registered in `.claude-plugin/marketplace.json` under the single `aigc-skills` plugin entry.
+Marketplace registration follows the `full-stack-skills` model: one plugin entry per skill group.
 
 ## Conventions
 
-- First-party skills MUST use the `aigc-` prefix.
-- Integrated skills MUST use the `integ-<sourceId>-<upstreamSlug>` prefix unless `rename` overrides it.
-- Each skill folder MUST contain `SKILL.md` with YAML frontmatter.
-- Skills MUST remain self-contained. Do not link from `SKILL.md` to repo-level `docs/`.
+- Group directories use the `*-skills` suffix.
+- `SKILL.md` frontmatter `name` must equal the leaf directory name.
+- Integrated skills use `integ-<sourceId>-<upstreamSlug>` unless `rename` overrides it.
+- Skills must remain self-contained. Do not link from `SKILL.md` to repo-level `docs/`.
 
 ## External Sync
 
 - Configure upstream repositories in `config/external-sources.json`.
+- Vendored output lands in `skills/<targetGroup>/<integ-skill>/`.
 - Run `npm run sync:external:dry` before applying changes.
-- Run `npm run sync:external` to vendor skills into `skills/`.
-- Review `integrations/reports/latest.json` after each sync.
-- Register newly imported skills in `marketplace.json`.
+- Run `npm run audit` and `npm run inventory` after registration changes.
 
 ## Author Docs
 
 | Topic | File |
 |-------|------|
+| Group mapping | [docs/aigc-skill-group-mapping.md](docs/aigc-skill-group-mapping.md) |
 | Creating first-party skills | [docs/creating-skills.md](docs/creating-skills.md) |
 | Syncing external repositories | [docs/syncing-external-skills.md](docs/syncing-external-skills.md) |
 | Platform coverage map | [docs/platforms.md](docs/platforms.md) |
@@ -41,4 +42,5 @@ All published skills are registered in `.claude-plugin/marketplace.json` under t
 1. Update `CHANGELOG.md` and `CHANGELOG.zh.md`
 2. Bump `.claude-plugin/marketplace.json` version
 3. Bump each changed skill `version` in `SKILL.md`
-4. Refresh `integrations/inventory.json` when skill coverage changes
+4. Refresh `docs/aigc-skill-group-mapping.md`
+5. Run `npm run audit` and `npm run inventory`

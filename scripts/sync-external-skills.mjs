@@ -13,6 +13,7 @@ import {
   parseSkillFrontmatter,
   removeDirectory,
   resolveRepoRoot,
+  resolveTargetGroup,
   runCommand,
   writeJson,
 } from "./lib/integration-utils.mjs";
@@ -53,7 +54,7 @@ async function main() {
     skills: [],
   };
 
-  const expectedSlugs = new Set();
+  const expectedPaths = new Set();
 
   for (const source of enabledSources) {
     const sourceReport = {
@@ -68,12 +69,14 @@ async function main() {
     try {
       const checkout = await ensureCheckout(repoRoot, cacheRoot, source, defaults, options);
       sourceReport.commit = checkout.commit;
-
+      const targetGroup = resolveTargetGroup(source, defaults);
       const discovered = await discoverSkills(checkout.dir, source, defaults);
+
       for (const skill of discovered) {
         const vendoredSlug = buildVendoredSlug(source.id, skill.slug, source.rename ?? {});
-        const targetDir = path.join(vendoredRoot, vendoredSlug);
-        expectedSlugs.add(vendoredSlug);
+        const targetDir = path.join(vendoredRoot, targetGroup, vendoredSlug);
+        const relativePath = path.posix.join(targetGroup, vendoredSlug);
+        expectedPaths.add(relativePath);
 
         const origin = {
           sourceId: source.id,
@@ -82,6 +85,7 @@ async function main() {
           commit: checkout.commit,
           upstreamPath: skill.relativePath,
           upstreamSlug: skill.slug,
+          targetGroup,
           vendoredSlug,
           license: source.license ?? defaults.license ?? null,
           platforms: source.platforms ?? [],
@@ -99,9 +103,9 @@ async function main() {
               : "unchanged";
 
         if (status === "unchanged") {
-          sourceReport.imported.push({ slug: vendoredSlug, status });
+          sourceReport.imported.push({ path: relativePath, status });
           nextManifest.skills.push({
-            slug: vendoredSlug,
+            path: relativePath,
             kind: "integrated",
             ...origin,
             fingerprint,
@@ -110,10 +114,10 @@ async function main() {
         }
 
         if (options.dryRun) {
-          sourceReport.imported.push({ slug: vendoredSlug, status: `would-${status}` });
-          report[status === "added" ? "added" : "updated"].push(vendoredSlug);
+          sourceReport.imported.push({ path: relativePath, status: `would-${status}` });
+          report[status === "added" ? "added" : "updated"].push(relativePath);
           nextManifest.skills.push({
-            slug: vendoredSlug,
+            path: relativePath,
             kind: "integrated",
             ...origin,
             fingerprint,
@@ -126,10 +130,10 @@ async function main() {
         await patchSkillMetadata(targetDir, vendoredSlug, origin);
         await writeJson(path.join(targetDir, ORIGIN_FILE), { ...origin, fingerprint });
 
-        sourceReport.imported.push({ slug: vendoredSlug, status });
-        report[status === "added" ? "added" : "updated"].push(vendoredSlug);
+        sourceReport.imported.push({ path: relativePath, status });
+        report[status === "added" ? "added" : "updated"].push(relativePath);
         nextManifest.skills.push({
-          slug: vendoredSlug,
+          path: relativePath,
           kind: "integrated",
           ...origin,
           fingerprint,
@@ -141,6 +145,7 @@ async function main() {
         repo: source.repo,
         ref: sourceReport.ref,
         commit: checkout.commit,
+        targetGroup,
         importedCount: sourceReport.imported.length,
         skippedCount: sourceReport.skipped.length,
       });
@@ -154,7 +159,7 @@ async function main() {
   }
 
   if (!options.dryRun) {
-    const removed = await removeStaleIntegratedSkills(vendoredRoot, expectedSlugs);
+    const removed = await removeStaleIntegratedSkills(vendoredRoot, expectedPaths);
     report.removed.push(...removed);
     await writeJson(path.join(repoRoot, "integrations", "manifest.json"), nextManifest);
   }
@@ -169,9 +174,6 @@ async function main() {
   }
 }
 
-/**
- * Parse CLI arguments for the external sync command.
- */
 function parseArgs(argv) {
   const options = {
     dryRun: false,
@@ -208,9 +210,6 @@ Options:
 `);
 }
 
-/**
- * Clone or update a cached checkout for one external source.
- */
 async function ensureCheckout(repoRoot, cacheRoot, source, defaults, options) {
   const ref = source.ref ?? defaults.ref ?? "main";
   const checkoutDir = path.join(cacheRoot, source.id);
@@ -247,13 +246,11 @@ async function ensureCheckout(repoRoot, cacheRoot, source, defaults, options) {
   };
 }
 
-/**
- * Discover importable skills from a cached repository checkout.
- */
 async function discoverSkills(checkoutDir, source, defaults) {
   const skillRoots = source.skillRoots ?? defaults.skillRoots ?? ["skills"];
   const include = source.include ?? [];
   const exclude = source.exclude ?? [];
+  const layout = source.layout ?? defaults.layout ?? "auto";
   const results = [];
 
   for (const root of skillRoots) {
@@ -267,36 +264,56 @@ async function discoverSkills(checkoutDir, source, defaults) {
     const entries = await fs.readdir(absoluteRoot, { withFileTypes: true });
     for (const entry of entries) {
       if (!entry.isDirectory()) continue;
-      const skillDir = path.join(absoluteRoot, entry.name);
-      const skillFile = path.join(skillDir, "SKILL.md");
-      try {
-        await fs.access(skillFile);
-      } catch {
+
+      const entryDir = path.join(absoluteRoot, entry.name);
+      const directSkillFile = path.join(entryDir, "SKILL.md");
+      const hasDirectSkill = await pathExists(directSkillFile);
+      const useGrouped = layout === "grouped" || (layout === "auto" && !hasDirectSkill);
+
+      if (!useGrouped && hasDirectSkill) {
+        pushCandidate(results, root, entry.name, entryDir, include, exclude);
         continue;
       }
 
-      const relativePath = path.posix.join(root, entry.name);
-      if (include.length > 0 && !matchesAnyPattern(relativePath, include) && !matchesAnyPattern(entry.name, include)) {
-        continue;
+      const nested = await fs.readdir(entryDir, { withFileTypes: true });
+      for (const child of nested) {
+        if (!child.isDirectory()) continue;
+        const childDir = path.join(entryDir, child.name);
+        const childSkillFile = path.join(childDir, "SKILL.md");
+        if (!(await pathExists(childSkillFile))) continue;
+        pushCandidate(results, root, child.name, childDir, include, exclude, path.posix.join(entry.name, child.name));
       }
-      if (matchesAnyPattern(relativePath, exclude) || matchesAnyPattern(entry.name, exclude)) {
-        continue;
-      }
-
-      results.push({
-        slug: entry.name,
-        relativePath,
-        absolutePath: skillDir,
-      });
     }
   }
 
   return results;
 }
 
-/**
- * Build a stable fingerprint for a skill directory.
- */
+function pushCandidate(results, root, slug, absolutePath, include, exclude, relativePath = slug) {
+  const normalizedPath = path.posix.join(root, relativePath);
+  if (include.length > 0 && !matchesAnyPattern(normalizedPath, include) && !matchesAnyPattern(slug, include)) {
+    return;
+  }
+  if (matchesAnyPattern(normalizedPath, exclude) || matchesAnyPattern(slug, exclude)) {
+    return;
+  }
+
+  results.push({
+    slug,
+    relativePath: normalizedPath,
+    absolutePath,
+  });
+}
+
+async function pathExists(targetPath) {
+  try {
+    await fs.access(targetPath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function fingerprintDirectory(root) {
   const files = await listReleaseFiles(root);
   const hash = crypto.createHash("sha256");
@@ -309,9 +326,6 @@ async function fingerprintDirectory(root) {
   return hash.digest("hex");
 }
 
-/**
- * Read the origin metadata for an existing vendored skill.
- */
 async function readOrigin(skillDir) {
   try {
     const raw = await fs.readFile(path.join(skillDir, ORIGIN_FILE), "utf8");
@@ -321,19 +335,15 @@ async function readOrigin(skillDir) {
   }
 }
 
-/**
- * Patch vendored SKILL.md metadata after import.
- */
 async function patchSkillMetadata(skillDir, vendoredSlug, origin) {
   const skillFile = path.join(skillDir, "SKILL.md");
   const content = await fs.readFile(skillFile, "utf8");
   const frontmatter = parseSkillFrontmatter(content);
-  const patchedName = frontmatter.name ? vendoredSlug : vendoredSlug;
   let next = content;
 
   if (/^---\r?\n[\s\S]*?\r?\n---/.test(content)) {
     next = content.replace(/^---\r?\n[\s\S]*?\r?\n---/, () => {
-      return `---\nname: ${patchedName}\ndescription: ${frontmatter.description ?? "Integrated AIGC skill."}\nversion: ${frontmatter.version ?? "0.0.0"}\nmetadata:\n  aigc:\n    origin:\n      sourceId: ${origin.sourceId}\n      repo: ${origin.repo}\n      upstreamSlug: ${origin.upstreamSlug}\n---`;
+      return `---\nname: ${vendoredSlug}\ndescription: ${frontmatter.description ?? "Integrated AIGC skill."}\nversion: ${frontmatter.version ?? "0.0.0"}\nmetadata:\n  aigc:\n    origin:\n      sourceId: ${origin.sourceId}\n      repo: ${origin.repo}\n      upstreamSlug: ${origin.upstreamSlug}\n      targetGroup: ${origin.targetGroup}\n---`;
     });
   }
 
@@ -353,24 +363,24 @@ async function patchSkillMetadata(skillDir, vendoredSlug, origin) {
   await fs.writeFile(skillFile, next, "utf8");
 }
 
-/**
- * Remove integrated skills that are no longer selected by the manifest config.
- */
-async function removeStaleIntegratedSkills(vendoredRoot, expectedSlugs) {
+async function removeStaleIntegratedSkills(vendoredRoot, expectedPaths) {
   const removed = [];
-  let entries = [];
-  try {
-    entries = await fs.readdir(vendoredRoot, { withFileTypes: true });
-  } catch {
-    return removed;
-  }
+  const groups = await fs.readdir(vendoredRoot, { withFileTypes: true }).catch(() => []);
 
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    if (!entry.name.startsWith("integ-")) continue;
-    if (expectedSlugs.has(entry.name)) continue;
-    await removeDirectory(path.join(vendoredRoot, entry.name));
-    removed.push(entry.name);
+  for (const group of groups) {
+    if (!group.isDirectory() || !group.name.endsWith("-skills")) continue;
+
+    const groupDir = path.join(vendoredRoot, group.name);
+    const entries = await fs.readdir(groupDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      const relativePath = path.posix.join(group.name, entry.name);
+      const originFile = path.join(groupDir, entry.name, ORIGIN_FILE);
+      if (!(await pathExists(originFile))) continue;
+      if (expectedPaths.has(relativePath)) continue;
+      await removeDirectory(path.join(groupDir, entry.name));
+      removed.push(relativePath);
+    }
   }
 
   return removed;

@@ -3,6 +3,7 @@
   "defaults": {
     "ref": "main",
     "skillRoots": ["skills"],
+    "layout": "auto",
     "enabled": true
   },
   "sources": [
@@ -11,6 +12,8 @@
       "repo": "JimLiu/baoyu-skills",
       "ref": "main",
       "enabled": false,
+      "layout": "flat",
+      "targetGroup": "integ-baoyu-skills",
       "platforms": ["wechat", "weibo", "x", "youtube"],
       "categories": ["content", "utility", "image"],
       "include": [

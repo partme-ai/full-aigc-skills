@@ -18,6 +18,11 @@
           "items": { "type": "string" }
         },
         "skillGlob": { "type": "string" },
+        "targetGroup": { "type": "string" },
+        "layout": {
+          "type": "string",
+          "enum": ["flat", "grouped", "auto"]
+        },
         "license": { "type": "string" },
         "enabled": { "type": "boolean" }
       },
@@ -53,6 +58,11 @@
             "items": { "type": "string" }
           },
           "skillGlob": { "type": "string" },
+          "targetGroup": { "type": "string" },
+          "layout": {
+            "type": "string",
+            "enum": ["flat", "grouped", "auto"]
+          },
           "include": {
             "type": "array",
             "items": { "type": "string" }

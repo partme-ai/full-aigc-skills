@@ -84,6 +84,19 @@ export function buildVendoredSlug(sourceId, originalSlug, renameMap = {}) {
 }
 
 /**
+ * Resolve the destination group directory for a vendored skill.
+ */
+export function resolveTargetGroup(source, defaults = {}) {
+  if (source.targetGroup) {
+    return source.targetGroup;
+  }
+  if (defaults.targetGroup) {
+    return defaults.targetGroup;
+  }
+  return `integ-${source.id}-skills`;
+}
+
+/**
  * Parse simple YAML frontmatter from SKILL.md.
  */
 export function parseSkillFrontmatter(content) {

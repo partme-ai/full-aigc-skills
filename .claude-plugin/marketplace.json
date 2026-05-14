@@ -6,15 +6,24 @@
   },
   "metadata": {
     "description": "AIGC skills for multi-platform content creation, publishing, and media generation",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "plugins": [
     {
-      "name": "aigc-skills",
-      "description": "First-party and curated AIGC skills across major internet platforms",
+      "name": "jimeng-skills",
+      "description": "Jimeng prompt engineering and CLI generation skills for image and video workflows",
       "source": "./",
       "strict": false,
-      "skills": []
+      "skills": [
+        "./skills/jimeng-skills/jimeng-cli-image2image",
+        "./skills/jimeng-skills/jimeng-cli-image2video",
+        "./skills/jimeng-skills/jimeng-cli-text2image",
+        "./skills/jimeng-skills/jimeng-cli-text2video",
+        "./skills/jimeng-skills/jimeng-prompt-image2image",
+        "./skills/jimeng-skills/jimeng-prompt-image2video",
+        "./skills/jimeng-skills/jimeng-prompt-text2image",
+        "./skills/jimeng-skills/jimeng-prompt-text2video"
+      ]
     }
   ]
 }

@@ -6,7 +6,7 @@ Curated AIGC skills for multi-platform content creation, publishing, and media g
 
 ## Goals
 
-- Publish your own AIGC skills under a stable `aigc-*` namespace.
+- Publish first-party AIGC skills under grouped directories.
 - Integrate high-quality public AIGC skill libraries into one catalog.
 - Track platform coverage across WeChat, Xiaohongshu, Douyin, Bilibili, Weibo, YouTube, X, and more.
 
@@ -14,12 +14,13 @@ Curated AIGC skills for multi-platform content creation, publishing, and media g
 
 | Path | Purpose |
 |------|---------|
-| `skills/` | First-party `aigc-*` skills and vendored `integ-*` skills |
+| `skills/<group>-skills/<skill>/` | Grouped skill directories |
 | `packages/` | Shared runtime libraries for multiple skills |
 | `config/external-sources.json` | Upstream GitHub repositories to sync |
+| `docs/aigc-skill-group-mapping.md` | Group-to-skill mapping table |
 | `integrations/manifest.json` | Last successful sync metadata |
 | `integrations/inventory.json` | Platform coverage inventory |
-| `scripts/` | Sync, inventory, and test utilities |
+| `scripts/` | Sync, audit, inventory, and test utilities |
 
 ## Install
 
@@ -35,29 +36,20 @@ Register the plugin marketplace in supported agents:
 
 ## Add a first-party skill
 
-1. Create `skills/aigc-<name>/SKILL.md`.
-2. Register `./skills/aigc-<name>` in `.claude-plugin/marketplace.json`.
-3. Run `npm run inventory` to refresh platform coverage.
+1. Create `skills/<group>-skills/<skill-name>/SKILL.md`.
+2. Register `./skills/<group>-skills/<skill-name>` in `.claude-plugin/marketplace.json`.
+3. Update `docs/aigc-skill-group-mapping.md`.
+4. Run `npm run audit` and `npm run inventory`.
 
 See [docs/creating-skills.md](./docs/creating-skills.md).
 
 ## Sync external skills
 
 1. Add repositories to [config/external-sources.json](./config/external-sources.json).
-2. Preview the import plan:
-
-```bash
-npm run sync:external:dry
-```
-
-3. Apply the sync:
-
-```bash
-npm run sync:external
-```
-
-4. Register newly vendored `integ-*` skills in `.claude-plugin/marketplace.json`.
-5. Run `npm run inventory`.
+2. Preview the import plan with `npm run sync:external:dry`.
+3. Apply the sync with `npm run sync:external`.
+4. Register approved `integ-*` skills in `.claude-plugin/marketplace.json`.
+5. Run `npm run audit` and `npm run inventory`.
 
 See [docs/syncing-external-skills.md](./docs/syncing-external-skills.md).
 
@@ -66,10 +58,11 @@ See [docs/syncing-external-skills.md](./docs/syncing-external-skills.md).
 | Command | Description |
 |---------|-------------|
 | `npm test` | Run Node-compatible repository tests |
+| `npm run audit` | Check grouped skills against marketplace registration |
 | `npm run sync:external` | Import or update vendored skills |
 | `npm run sync:external:dry` | Dry-run external sync |
 | `npm run inventory` | Build platform inventory |
 
-## Status
+## Current Groups
 
-Project scaffolding is ready. Add your first-party skills under `skills/aigc-*` and upstream repositories under `config/external-sources.json`.
+- `jimeng-skills`: Jimeng prompt and CLI generation skills

@@ -1,6 +1,12 @@
 # Syncing External Skills
 
-This repository vendors public skill libraries into `skills/integ-*` using `scripts/sync-external-skills.mjs`.
+External repositories are vendored into grouped directories:
+
+```text
+skills/<targetGroup>/<integ-skill>/SKILL.md
+```
+
+Default `targetGroup` is `integ-<sourceId>-skills`.
 
 ## Configure a Source
 
@@ -12,6 +18,7 @@ Edit `config/external-sources.json`:
   "defaults": {
     "ref": "main",
     "skillRoots": ["skills"],
+    "layout": "auto",
     "enabled": true
   },
   "sources": [
@@ -19,32 +26,29 @@ Edit `config/external-sources.json`:
       "id": "baoyu",
       "repo": "JimLiu/baoyu-skills",
       "ref": "main",
+      "enabled": false,
+      "layout": "flat",
+      "targetGroup": "integ-baoyu-skills",
       "platforms": ["wechat", "weibo", "x", "youtube"],
       "categories": ["content", "utility"],
-      "include": ["baoyu-post-to-wechat", "baoyu-post-to-weibo", "baoyu-post-to-x"],
-      "rename": {
-        "baoyu-post-to-wechat": "integ-baoyu-wechat-publish"
-      },
-      "license": "MIT-0",
-      "notes": "Example entry only. Remove or disable until you confirm licensing."
+      "include": [
+        "baoyu-post-to-wechat",
+        "baoyu-post-to-weibo",
+        "baoyu-post-to-x"
+      ],
+      "license": "MIT-0"
     }
   ]
 }
 ```
 
-Field reference:
+`layout` values:
 
-| Field | Meaning |
-|-------|---------|
-| `id` | Stable cache namespace under `.cache/external/` |
-| `repo` | GitHub `owner/name` |
-| `ref` | Branch, tag, or commit to fetch |
-| `skillRoots` | Directories that contain one skill per folder |
-| `include` | Optional allowlist by folder name or relative path |
-| `exclude` | Optional denylist |
-| `rename` | Optional vendored slug overrides |
-| `platforms` | Coverage tags used by `build-inventory.mjs` |
-| `license` | Recorded in origin metadata |
+| Value | Upstream shape |
+|-------|----------------|
+| `flat` | `skills/<skill>/SKILL.md` |
+| `grouped` | `skills/<group>/<skill>/SKILL.md` |
+| `auto` | Detect per directory |
 
 ## Run Sync
 
@@ -60,12 +64,6 @@ Apply:
 npm run sync:external
 ```
 
-Force refresh cached repositories:
-
-```bash
-node ./scripts/sync-external-skills.mjs --force
-```
-
 ## Review Output
 
 - `integrations/manifest.json` stores the latest successful sync metadata.
@@ -74,14 +72,9 @@ node ./scripts/sync-external-skills.mjs --force
 
 ## Register Imported Skills
 
-The sync script does not edit `.claude-plugin/marketplace.json` automatically. After review, register approved `integ-*` skills manually.
+The sync script does not edit `.claude-plugin/marketplace.json` automatically. After review:
 
-## Periodic Integration
-
-Recommended cadence:
-
-1. Update `config/external-sources.json`.
-2. Run `npm run sync:external:dry`.
-3. Review attribution, licenses, and platform coverage.
-4. Run `npm run sync:external`.
-5. Register approved skills and run `npm run inventory`.
+1. Register approved skills under the matching `integ-*` plugin entry.
+2. Update `docs/aigc-skill-group-mapping.md`.
+3. Run `npm run audit`.
+4. Run `npm run inventory`.
