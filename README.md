@@ -66,3 +66,4 @@ See [docs/syncing-sources.md](./docs/syncing-sources.md).
 - `jimeng-skills`: Jimeng prompt and CLI generation skills
 - `pippit-skills`: Pippit / 小云雀 session skills with upstream README at the group root
 - `minimax-skills`: MiniMax multimodal and music skills (only the three configured skills are synced)
+- `remotion-skills`: Remotion video creation best practices (from [remotion-dev/skills](https://github.com/remotion-dev/skills))

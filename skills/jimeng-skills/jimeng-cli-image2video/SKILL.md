@@ -92,7 +92,7 @@ dreamina image2video --image ./photo.png --prompt="..." --model_version=seedance
 | `--image` | **Yes** | Single local image path | — |
 | `--prompt` | No* | Motion description (incremental) | — |
 | `--duration` | No | 3-15s (model-dependent) | 5 |
-| `--model_version` | **Yes** | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip**, 3.0, 3.0fast, 3.0pro, 3.5pro | seedance2.0fast_vip ⬅️ VIP 优先 |
+| `--model_version` | No | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip**, 3.0, 3.0fast, 3.0pro, 3.5pro | seedance2.0fast_vip ⬅️ VIP 优先 |
 | `--video_resolution` | No | 720P (Seedance), 1080P (legacy) | 720P |
 | `--poll` | No | Seconds (0=async, polls every 1s) | 0 |
 
@@ -116,7 +116,7 @@ dreamina frames2video --first ./morning.png --last ./night.png --prompt="天空�
 | `--last` | **Yes** | Local image path (end frame) | — |
 | `--prompt` | No* | Transition description | — |
 | `--duration` | No | 4-15s | 5 |
-| `--model_version` | **Yes** | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip**, 3.5pro | seedance2.0fast_vip ⬅️ VIP 优先 |
+| `--model_version` | No | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip**, 3.5pro | seedance2.0fast_vip ⬅️ VIP 优先 |
 | `--video_resolution` | No | 720P (Seedance), 1080P (legacy) | 720P |
 
 ## Mode 3: Multi-Frame Story (`dreamina multiframe2video`)
@@ -183,14 +183,14 @@ dreamina multimodal2video \
 ```
 
 | Parameter | Required | Values | Default |
-|-----------|--------|--------|---------|
-| `--image` | No | Up to 9 local image paths | — |
+|-----------|----------|--------|---------|
+| `--image` | No* | Up to 9 local image paths | — |
 | `--video` | No | Up to 3 local video paths | — |
 | `--audio` | No | Up to 3 local audio paths | — |
-| `--prompt` | No | Synthesis description | — |
+| `--prompt` | No* | Synthesis description | — |
 | `--duration` | No | 4-15s | 5 |
 | `--ratio` | No | 1:1, 3:4, 16:9, 4:3, 9:16, 21:9 | 16:9 |
-| `--model_version` | **Yes** | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip** | seedance2.0fast_vip ⬅️ VIP 优先 |
+| `--model_version` | No | seedance2.0, seedance2.0fast, **seedance2.0_vip, seedance2.0fast_vip** | seedance2.0fast_vip ⬅️ VIP 优先 |
 
 > At least one of `--image`, `--video`, or `--audio` required. Max: 9 images + 3 videos + 3 audio.
 

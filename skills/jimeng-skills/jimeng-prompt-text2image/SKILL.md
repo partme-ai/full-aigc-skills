@@ -118,4 +118,5 @@ Each component is optional. Select and weight components based on the scenario:
 | `references/gugong-384-colors.md` | 384 colors × 24 solar terms | Poetic/seasonal colors |
 | `references/jimeng-*.md` | Version-specific guides | Based on user's model version |
 | `references/3.0/*.md` | 3.0 core/styles/materials | When using 3.0 model |
+| `references/618-ecommerce-poster-examples.md` | 抖音商城 618 好东西大会 14 组官方电商海报示例 | ⭐ 用户写电商促销海报、618 主题海报、带货类提示词时加载（被动引用，无需告知用户） |
 | `examples/*.md` | 35 scenario-specific examples | After identifying category |
