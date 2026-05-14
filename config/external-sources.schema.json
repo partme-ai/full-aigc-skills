@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://partme.ai/schemas/aigc-skills/external-sources.schema.json",
+  "title": "AIGC external skill sources",
+  "type": "object",
+  "required": ["version", "sources"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "defaults": {
+      "type": "object",
+      "properties": {
+        "ref": { "type": "string" },
+        "skillRoots": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "skillGlob": { "type": "string" },
+        "license": { "type": "string" },
+        "enabled": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "repo"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "repo": {
+            "type": "string",
+            "description": "owner/name on GitHub"
+          },
+          "ref": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "license": { "type": "string" },
+          "platforms": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "categories": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "skillRoots": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "skillGlob": { "type": "string" },
+          "include": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "exclude": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "rename": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "defaults": {
+    "ref": "main",
+    "skillRoots": ["skills"],
+    "skillGlob": "**/SKILL.md",
+    "enabled": true
+  },
+  "sources": []
+}

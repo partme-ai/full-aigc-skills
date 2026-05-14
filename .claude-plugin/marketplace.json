@@ -1,0 +1,20 @@
+{
+  "name": "aigc-skills",
+  "owner": {
+    "name": "PartMe",
+    "email": ""
+  },
+  "metadata": {
+    "description": "AIGC skills for multi-platform content creation, publishing, and media generation",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "aigc-skills",
+      "description": "First-party and curated AIGC skills across major internet platforms",
+      "source": "./",
+      "strict": false,
+      "skills": []
+    }
+  ]
+}

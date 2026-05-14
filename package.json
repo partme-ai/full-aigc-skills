@@ -1,0 +1,14 @@
+{
+  "name": "aigc-skills",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "node ./scripts/run-node-tests.mjs",
+    "sync:external": "node ./scripts/sync-external-skills.mjs",
+    "sync:external:dry": "node ./scripts/sync-external-skills.mjs --dry-run",
+    "inventory": "node ./scripts/build-inventory.mjs"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "defaults": {
+    "ref": "main",
+    "skillRoots": ["skills"],
+    "enabled": true
+  },
+  "sources": [
+    {
+      "id": "baoyu",
+      "repo": "JimLiu/baoyu-skills",
+      "ref": "main",
+      "enabled": false,
+      "platforms": ["wechat", "weibo", "x", "youtube"],
+      "categories": ["content", "utility", "image"],
+      "include": [
+        "baoyu-post-to-wechat",
+        "baoyu-post-to-weibo",
+        "baoyu-post-to-x",
+        "baoyu-imagine",
+        "baoyu-markdown-to-html"
+      ],
+      "license": "MIT-0",
+      "notes": "Example only. Enable after reviewing license and platform scope."
+    }
+  ]
+}
