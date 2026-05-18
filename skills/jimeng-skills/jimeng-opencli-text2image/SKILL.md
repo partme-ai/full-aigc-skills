@@ -1,6 +1,6 @@
 ---
 name: jimeng-opencli-text2image
-description: Execute Jimeng text-to-image for standard (non-VIP) members using only opencli jimeng browser commands on jimeng.jianying.com. Covers generate, history, new, and workspaces. Does not use dreamina CLI. Pair with jimeng-prompt-text2image for prompts. Use when the user cannot use dreamina and must automate via opencli Browser Bridge.
+description: Execute Jimeng text-to-image for standard (non-VIP) members using only opencli jimeng browser commands on jimeng.jianying.com. Covers generate, history, new, workspaces, user_credit, user_assets, user_subscription. Does not use dreamina CLI. Pair with jimeng-prompt-text2image for prompts. Use when the user cannot use dreamina and must automate via opencli Browser Bridge.
 license: Complete terms in LICENSE.txt
 ---
 
@@ -14,10 +14,14 @@ license: Complete terms in LICENSE.txt
 
 | 子命令 | 作用 | 关键参数 / 输出 |
 |--------|------|-----------------|
-| `generate <prompt>` | 文生图 | `--model`、`--wait`；列 `status`、`prompt`、`image_count`、`image_urls` |
-| `history` | 最近作品 | `--limit`；列 `prompt`、`model`、`status`、`image_url`、`created_at` |
-| `new` | 新建 workspace | 列 `workspace_id`、`workspace_url` |
+| `generate <prompt>` | 文生图 | `--model`、`--wait`、`--workspace`；列 `status`、`media_type`、`media_count`、`media_urls` |
+| `generate-image2image <prompt>` | 图生图 | 必填 `--images`（逗号分隔路径，最多 10 张） |
+| `history` | 最近作品 | `--limit`、`--workspace`、`--type`；列 `history_id`、`media_type`、`media_url` 等 |
+| `new` | 新建 workspace | `--type`；列 `workspace_id`、`workspace_url`、`type` |
 | `workspaces` | 工作区列表 | 列 `workspace_id`、`name`、`is_pinned`、`updated_at` |
+| `user_credit` | 积分余额 | 列 `balance`、`vip_credit`、`gift_credit`、`purchase_credit` |
+| `user_subscription` | 会员信息 | 列 `cur_vip_level`、`subscribe_type`、`end_time` 等 |
+| `user_assets` | 资产库各 Tab | `--tab`、`--wait`；列 `tab`、`item_count`、`request_url` |
 
 通用选项（各子命令）：`-f/--format`（table、plain、json 等）、`-v/--verbose`。策略：Cookie + Browser，域名 `jimeng.jianying.com`。
 
@@ -50,7 +54,7 @@ opencli jimeng generate "水墨山水" --format json
 | `--model` | 默认 `high_aes_general_v50`；可选 `high_aes_general_v42`（4.6）、`high_aes_general_v40`（4.0） |
 | `--wait` | 等待出图秒数，默认 `40` |
 
-`status` 为 `success` 时从 `image_urls` 取链接；`timeout` 时增加 `--wait` 或查 `history`；`failed` 时提示检查登录、积分或网页合规弹窗。
+`status` 为 `success` 时从 `media_urls` 取链接；`timeout` 时增加 `--wait` 或查 `history`；`failed` 时提示检查登录、积分（`user_credit`）或网页合规弹窗。
 
 ## 辅助命令
 

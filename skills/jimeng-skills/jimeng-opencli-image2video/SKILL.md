@@ -10,15 +10,15 @@ license: Complete terms in LICENSE.txt
 
 增量运动 prompt 由 `jimeng-prompt-image2video` 提供；**图生视频 / 首尾帧 / 分镜 / 全能参考**在即梦网页由用户选择模式并上传素材后生成。
 
-## opencli 能力边界
+## opencli 命令
 
-| 子命令 | 本技能中的用途 |
+| 子命令 | 用途 |
 |--------|----------------|
-| `history` | 任务完成后核对历史记录 |
+| `generate-image2video <prompt> --image <path>` | 单张参考图 + 运动 prompt（`type=video`） |
+| `history` | 任务完成后核对 |
 | `new` / `workspaces` | 会话管理 |
-| `generate` | 不用于图生视频 |
 
-opencli **无**按输入自动路由的子命令（无 `--image`、`--first`/`--last`、`--images` 等）。
+首尾帧、多分镜、多模态仍须在网页选手动模式；opencli **无** `--first`/`--last` 路由。
 
 ## 网页模式与 prompt 技能对齐
 
@@ -35,18 +35,16 @@ opencli **无**按输入自动路由的子命令（无 `--image`、`--first`/`--
 
 ```
 1. PROMPT  → jimeng-prompt-image2video
-2. SESSION → 可选 opencli jimeng new
-3. MANUAL  → 用户在即梦网页选模式、上传本地素材、粘贴 prompt、生成
-4. VERIFY  → opencli jimeng history --limit N（视频等待可长达十余分钟，分轮查询）
-5. REPORT  → 无自动化 submit_id；以 history + 用户确认交付
+2. SESSION → 可选 opencli jimeng new --type=video
+3. GEN     → opencli jimeng generate-image2video "<motion prompt>" --image ./frame.png --wait 180
+4. VERIFY  → opencli jimeng history --limit N --type=video（视频可长达十余分钟，分轮查询）
 ```
 
 ## 允许的 opencli 示例
 
 ```bash
-opencli jimeng new
-opencli jimeng workspaces
-opencli jimeng history --limit 10
+opencli jimeng generate-image2video "镜头缓慢推进，发丝随风飘动" --image ./portrait.jpg --wait 180
+opencli jimeng history --limit 10 --type=video
 ```
 
 ## 禁止事项
@@ -63,10 +61,10 @@ opencli jimeng history --limit 10
 
 - prompt 只描述**动起来**的部分，不重复画面静态内容。
 - 分轮 `history` 验收，禁止 shell 死循环。
-- 素材须由用户在网页上传；opencli 不能代替 `--image` 上传。
+- 单图图生视频用 `generate-image2video --image`；复杂模式仍引导用户在网页操作。
 
 ## Gotchas
 
-1. 单图 / 首尾帧 / 分镜 / 多模态能力边界以即梦网页为准，与 CLI 技能表格概念对齐但**执行面不同**。
-2. 普通会员排队与积分以网页为准。
-3. 上游若增加 `opencli jimeng image2video` 等，再更新本技能；此前不得 dreamina 回退。
+1. 首尾帧 / 分镜 / 多模态须网页手动，不得虚构 opencli 参数。
+2. 视频耗时长，默认 `--wait=120`，图生视频建议 180+。
+3. 普通会员排队与积分以网页为准。
