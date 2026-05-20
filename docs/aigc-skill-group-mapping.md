@@ -8,21 +8,24 @@
 
 | 组目录名 | 技能名列表 | 数量 | 平台/类别 | 说明 |
 |----------|------------|------|-----------|------|
+| **id-photo-skills** | id-photo | 1 | generic | 证件照生成，基于 HivisionIDPhotos API，两步流程：抠图裁切→换底 |
 | **jimeng-skills** | jimeng-cli-image2image, jimeng-cli-image2video, jimeng-cli-text2image, jimeng-cli-text2video, jimeng-opencli-image2image, jimeng-opencli-image2video, jimeng-opencli-text2image, jimeng-opencli-text2video, jimeng-prompt-image2image, jimeng-prompt-image2video, jimeng-prompt-text2image, jimeng-prompt-text2video | 12 | jimeng / generic | 即梦提示词、dreamina CLI 与 opencli 浏览器编排技能 |
+| **kling-skills** | kling-prompt, kling-video | 2 | kling | 可灵视频生成：SDK 调用 + 提示词工程，适配自 runapi-ai/kling 和 smixs/visual-skills |
 | **pippit-skills** | xyq-nest-skill | 1 | generic | 小云雀 / Pippit 会话式生图生视频技能，组根目录保留上游 `README.md` |
 | **minimax-skills** | minimax-multimodal-toolkit, minimax-music-gen, minimax-music-playlist | 3 | generic | MiniMax 多模态与音乐技能，通过 `include` 只同步指定技能 |
 | **remotion-skills** | remotion | 1 | generic | [remotion-dev/skills](https://github.com/remotion-dev/skills) Remotion 视频创作最佳实践 |
+| **coze-skills** | coze-asr, coze-image-gen, coze-tts, coze-voice-gen, coze-web-fetch, coze-web-search | 6 | generic | 扣子生图、语音、搜索等 API 技能，自研 |
+| **zhipu-skills** | zhipu-audio, zhipu-embedding, zhipu-humanoid, zhipu-image-generation, zhipu-ocr, zhipu-text, zhipu-video-generation, zhipu-vlm | 8 | zhipu | 智谱全栈技能：文本/视觉/图像/视频/语音/向量/OCR/拟人，适配自 Wcowin/zhipu-OCR-skill 和 tencentjerry-afk/zhipu-claude-skills |
 
 ## 规划中的组
 
 | 组目录名 | 状态 | 说明 |
 |----------|------|------|
-| **kling-skills** | 待补充 | 可灵等快手系视频生成 |
+| **kling-skills** | ✅ 已注册 | 可灵视频生成，2 个技能已上线 |
 | **wanx-skills** | 待补充 | 通义万相等阿里系图像/视频 |
 | **seedream-skills** | 待补充 | 豆包 Seedream 等字节系图像 |
-| **zhipu-skills** | 待补充 | 智谱图像/视频能力 |
+| **zhipu-skills** | ✅ 已注册 | 智谱全栈技能，8 个技能已上线 |
 | **hailuo-skills** | 待补充 | 海螺等 MiniMax 系视频（与 minimax-skills 分工待定） |
-| **coze-skills** | 待补充 | 扣子生图、语音等（参考工作区 `coze-skills`，自研或同步策略待定） |
 | **volcengine-skills** | 待补充 | 火山引擎视觉/视频类生成 API |
 | **baidu-qianfan-skills** | 待补充 | 千帆等百度系生成能力 |
 | **integ-<source>-skills** | 按需生成 | 国内平台上游仓库同步后的技能组（`include` 白名单） |

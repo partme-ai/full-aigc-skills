@@ -1,12 +1,6 @@
 ---
 name: minimax-music-gen
-description: >
-  Use when user wants to generate music, songs, or audio tracks. Triggers on any request
-  involving music creation, song writing, lyrics generation, audio production, or covers.
-  Also triggers when user provides lyrics and wants them turned into a song, or describes
-  a mood/scene and wants background music. Supports multilingual triggers — match equivalent
-  phrases in any language. Do NOT use for music playback of existing files, music theory
-  questions, or music recommendation without generation.
+description: Use when user wants to generate music, songs, or audio tracks. Triggers on any request involving music creation, song writing, lyrics generation, audio production, or covers. Also triggers when user provides lyrics and wants them turned into a song, or describes a mood/scene and wants background music. Supports multilingual triggers — match equivalent phrases in any language. Do NOT use for music playback of existing files, music theory questions, or music recommendation without generation.
 license: MIT
 metadata:
   version: "1.1"

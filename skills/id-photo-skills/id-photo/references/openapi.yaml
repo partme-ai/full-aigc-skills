@@ -1,0 +1,174 @@
+openapi: 3.0.0
+info:
+  title: HivisionIDPhotos - 证件照生成 API
+  version: 1.0.0
+  description: 基于 Zeyi-Lin/HivisionIDPhotos 的证件照生成服务
+servers:
+  - url: "http://127.0.0.1:8080"
+    description: 本地 Docker 服务
+
+paths:
+  /idphoto:
+    post:
+      operationId: generateIdPhoto
+      summary: 生成证件照透明底
+      description: 上传 RGB 图片，人脸检测、抠图、对齐、裁切，返回透明底 RGBA 证件照
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [input_image]
+              properties:
+                input_image:
+                  type: string
+                  format: binary
+                height:
+                  type: integer
+                  default: 413
+                width:
+                  type: integer
+                  default: 295
+                human_matting_model:
+                  type: string
+                  enum: [modnet_photographic_portrait_matting, hivision_modnet, rmbg-1.4, birefnet-v1-lite]
+                  default: hivision_modnet
+                face_detect_model:
+                  type: string
+                  enum: [mtcnn, retinaface-resnet50, face_plusplus]
+                  default: mtcnn
+                hd:
+                  type: boolean
+                  default: true
+                dpi:
+                  type: integer
+                  default: 300
+                face_alignment:
+                  type: boolean
+                  default: true
+                head_measure_ratio:
+                  type: number
+                  default: 0.2
+                head_height_ratio:
+                  type: number
+                  default: 0.45
+                top_distance_max:
+                  type: number
+                  default: 0.12
+                top_distance_min:
+                  type: number
+                  default: 0.1
+      responses:
+        "200":
+          description: 透明底证件照
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  image_base64_standard:
+                    type: string
+                    description: 标准尺寸 RGBA (Base64)
+                  image_base64_hd:
+                    type: string
+                    description: 高清 RGBA (Base64)
+
+  /add_background:
+    post:
+      operationId: addBackground
+      summary: 给 RGBA 证件照添加纯色背景
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [input_image]
+              properties:
+                input_image:
+                  type: string
+                  format: binary
+                  description: RGBA 4 通道图片
+                color:
+                  type: string
+                  default: "FFFFFF"
+                  description: HEX 颜色值
+                render:
+                  type: integer
+                  enum: [0, 1, 2]
+                  default: 0
+                  description: "0=纯色 1=竖渐变 2=中心渐变"
+                kb:
+                  type: integer
+                  description: 目标文件大小 (KB)
+                dpi:
+                  type: integer
+                  default: 300
+      responses:
+        "200":
+          description: 成品证件照 JPG
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  image_base64:
+                    type: string
+                    description: 成品 JPG (Base64)
+
+  /generate_layout_photos:
+    post:
+      operationId: generateLayoutPhotos
+      summary: 生成 6 寸相纸排版照
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [input_image]
+              properties:
+                input_image:
+                  type: string
+                  format: binary
+                height:
+                  type: integer
+                  default: 413
+                width:
+                  type: integer
+                  default: 295
+                kb:
+                  type: integer
+                dpi:
+                  type: integer
+                  default: 300
+      responses:
+        "200":
+          description: 排版照 JPG
+
+  /set_kb:
+    post:
+      operationId: setKb
+      summary: 调整图片文件大小
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [input_image]
+              properties:
+                input_image:
+                  type: string
+                  format: binary
+                kb:
+                  type: integer
+                dpi:
+                  type: integer
+                  default: 300
+      responses:
+        "200":
+          description: 调整后的图片

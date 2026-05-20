@@ -10,6 +10,15 @@
   },
   "plugins": [
     {
+      "name": "id-photo-skills",
+      "description": "ID photo generation via HivisionIDPhotos API — matting, cropping, background replacement, and print layout",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/id-photo-skills/id-photo"
+      ]
+    },
+    {
       "name": "jimeng-skills",
       "description": "Jimeng prompt engineering and CLI generation skills for image and video workflows",
       "source": "./",
@@ -30,12 +39,36 @@
       ]
     },
     {
+      "name": "coze-skills",
+      "description": "Coze platform skills for image generation, TTS, ASR, web fetch, and web search",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/coze-skills/coze-asr",
+        "./skills/coze-skills/coze-image-gen",
+        "./skills/coze-skills/coze-tts",
+        "./skills/coze-skills/coze-voice-gen",
+        "./skills/coze-skills/coze-web-fetch",
+        "./skills/coze-skills/coze-web-search"
+      ]
+    },
+    {
       "name": "pippit-skills",
       "description": "Pippit / 小云雀 agent session skills for image and video creation workflows",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/pippit-skills/xyq-nest-skill"
+      ]
+    },
+    {
+      "name": "kling-skills",
+      "description": "Kling AI (可灵) video generation skills — SDK execution and prompt engineering for text-to-video, image-to-video, AI avatars, and motion control",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/kling-skills/kling-prompt",
+        "./skills/kling-skills/kling-video"
       ]
     },
     {
@@ -47,6 +80,22 @@
         "./skills/minimax-skills/minimax-multimodal-toolkit",
         "./skills/minimax-skills/minimax-music-gen",
         "./skills/minimax-skills/minimax-music-playlist"
+      ]
+    },
+    {
+      "name": "zhipu-skills",
+      "description": "Zhipu AI (智谱) platform skills covering text, vision, image/video generation, audio, embeddings, OCR, and humanoid models",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/zhipu-skills/zhipu-audio",
+        "./skills/zhipu-skills/zhipu-embedding",
+        "./skills/zhipu-skills/zhipu-humanoid",
+        "./skills/zhipu-skills/zhipu-image-generation",
+        "./skills/zhipu-skills/zhipu-ocr",
+        "./skills/zhipu-skills/zhipu-text",
+        "./skills/zhipu-skills/zhipu-video-generation",
+        "./skills/zhipu-skills/zhipu-vlm"
       ]
     },
     {
