@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-05-14T15:09:55.241Z",
+  "dryRun": false,
+  "sources": [
+    {
+      "id": "pippit",
+      "ref": "master",
+      "commit": "72c57fffd28e53db7422930666e9cd83c9054b13",
+      "imported": [
+        {
+          "path": "pippit-skills/xyq-nest-skill",
+          "status": "added"
+        }
+      ],
+      "skipped": []
+    }
+  ],
+  "added": [
+    "pippit-skills/xyq-nest-skill"
+  ],
+  "updated": [],
+  "removed": [],
+  "skipped": [],
+  "errors": [],
+  "groupReadmes": [
+    "skills/pippit-skills/README.md"
+  ]
+}
