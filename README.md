@@ -2,58 +2,58 @@
 
 # Full AIGC Skills
 
-**34+ Agent Skills. 6+ Skill Packages. One Ecosystem.**
+**34+ 个 Agent Skills。6+ 个技能包。一个统一生态。**
 
-*Image · Video · Audio · Music · Text · Multimodal — production-ready, independently installable AIGC skills.*
+*图像 · 视频 · 音频 · 音乐 · 文本 · 多模态 — 生产级品质，独立安装的 AIGC 技能。*
 
 [![Stars](https://img.shields.io/github/stars/partme-ai/full-aigc-skills?style=social)](https://github.com/partme-ai/full-aigc-skills)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Compatible-purple)](https://agentskills.io)
 
-English | [简体中文](./README.zh-CN.md)
+[English](./README.en.md)
 
-[Introduction](#-introduction) ·
-[Install](#-install) ·
-[Skill Catalog](#-skill-catalog) ·
-[Community Resources](#-community-resources) ·
-[Architecture](#-architecture) ·
-[Contributing](#-contributing)
+[简介](#-简介) ·
+[安装](#-安装) ·
+[技能目录](#-技能目录) ·
+[社区资源](#-社区资源) ·
+[架构](#-架构) ·
+[贡献](#-贡献指南)
 
 </div>
 
 ---
 
-## Introduction
+## 简介
 
-**Full AIGC Skills** is the navigation hub for Agent Skills focused on AI-generated content — covering image generation, video creation, audio synthesis, music production, text generation, and multimodal workflows. All skills follow the [Agent Skills Specification](https://agentskills.io/) and are independently installable.
+**Full AIGC Skills** 是面向 AI 生成内容 (AIGC) 的 Agent Skills 导航站 — 涵盖图像生成、视频创作、音频合成、音乐制作、文本生成和多模态工作流。所有技能遵循 [Agent Skills 规范](https://agentskills.io/)，可独立安装。
 
-This repo started as a monorepo for Chinese AIGC platform skills. In June 2026 we split into **6+ independent packages** under the [full-aigc-skills](https://github.com/full-aigc-skills) GitHub organization. This repo is now the catalog, navigation hub, and community resource center.
+本仓库原为国内 AIGC 平台技能的 monorepo。2026 年 6 月，我们将所有技能拆分为 [full-aigc-skills](https://github.com/full-aigc-skills) GitHub 组织下的 **6+ 个独立包**。本仓库现为目录、导航站和社区资源中心。
 
-> **Migration Complete (June 2026)**: All 34 skills have been migrated to individual repos under [full-aigc-skills](https://github.com/full-aigc-skills). This repo is now the catalog & navigation hub.
+> **迁移完成（2026 年 6 月）**：全部 34 个技能已迁移到 [full-aigc-skills](https://github.com/full-aigc-skills) 组织下的独立仓库。本仓库现在是目录和导航站。
 
-### What We Cover
+### 覆盖领域
 
-| Domain | Problem | Solution |
-|--------|---------|----------|
-| **图像生成** | Text-to-image, image editing, style transfer | Dedicated prompt + CLI skills per platform |
-| **视频创作** | Text-to-video, image-to-video, video editing | Prompt engineering + API integration skills |
-| **音频/音乐** | TTS, music generation, sound effects | Multimodal toolkit + music production skills |
-| **文本生成** | LLM writing, translation, summarization | Platform-specific text generation skills |
-| **多模态融合** | Cross-modal tasks, multimodal dialogues | OCR, VLM, embedding, multimodal toolkit skills |
+| 领域 | 问题 | 解决方案 |
+|------|------|----------|
+| **图像生成** | 文生图、图像编辑、风格迁移 | 每个平台配备专属提示词 + CLI 技能 |
+| **视频创作** | 文生视频、图生视频、视频编辑 | 提示词工程 + API 集成技能 |
+| **音频/音乐** | TTS、音乐生成、音效合成 | 多模态工具集 + 音乐制作技能 |
+| **文本生成** | LLM 写作、翻译、摘要 | 平台特定文本生成技能 |
+| **多模态融合** | 跨模态任务、多模态对话 | OCR、VLM、Embedding、多模态工具集技能 |
 
 ---
 
-## Install
+## 安装
 
-Install any skill package with one command:
+一条命令安装任意技能包：
 
 ```bash
-npx skills add full-aigc-skills/jimeng-skills   # 即梦 image & video (12 skills)
-npx skills add full-aigc-skills/zhipu-skills    # 智谱 text/image/video/audio (8 skills)
-npx skills add full-aigc-skills/coze-skills     # 扣子 ASR/TTS/image/search (6 skills)
+npx skills add full-aigc-skills/jimeng-skills   # 即梦 图像&视频 (12 个技能)
+npx skills add full-aigc-skills/zhipu-skills    # 智谱 文本/图像/视频/音频 (8 个技能)
+npx skills add full-aigc-skills/coze-skills     # 扣子 ASR/TTS/图像/搜索 (6 个技能)
 ```
 
-Or install a specific skill from a package:
+或安装包中的特定技能：
 
 ```bash
 npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
@@ -61,170 +61,166 @@ npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
 
 ---
 
-## Skill Catalog
+## 技能目录
 
-| Platform | Package | Skills | Install |
-|----------|---------|:------:|---------|
+| 平台 | 包 | 技能数 | 安装 |
+|------|---|:------:|------|
 | 🎨 **即梦 (Jimeng)** | [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | 12 | `npx skills add full-aigc-skills/jimeng-skills` |
 | 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | 2 | `npx skills add full-aigc-skills/kling-skills` |
 | 🧠 **智谱 (Zhipu)** | [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | 8 | `npx skills add full-aigc-skills/zhipu-skills` |
 | 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | 3 | `npx skills add full-aigc-skills/minimax-skills` |
 | 🤖 **扣子 (Coze)** | [coze-skills](https://github.com/full-aigc-skills/coze-skills) | 6 | `npx skills add full-aigc-skills/coze-skills` |
 | 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | 1 | `npx skills add full-aigc-skills/pippit-skills` |
-| **Total** | | **32** | |
+| **总计** | | **32** | |
 
 ---
 
-## Community Resources
+## 社区资源
 
-In addition to our own skill packages, we track the best AIGC resources across the ecosystem.
+除了我们自己的技能包，我们还追踪 AIGC 生态中最优质的社区资源。
 
-### 🌟 Awesome Lists
+### 🌟 Awesome 资源列表
 
-| Resource | Stars | Focus |
-|----------|:-----:|-------|
-| [awesome-generative-ai-guide](https://github.com/aishwaryanr/awesome-generative-ai-guide) | 27k+ | Comprehensive generative AI research, tutorials, notebooks |
-| [awesome-generative-ai](https://github.com/steven2358/awesome-generative-ai) | 12k+ | Modern generative AI projects and services |
-| [awesome-generative-ai](https://github.com/filipecalegario/awesome-generative-ai) | 3k+ | Tools, works, models, references |
-| [Awesome-AIGC-Tutorials](https://github.com/luban-agi/Awesome-AIGC-Tutorials) | 4.5k+ | LLM and AI painting tutorials |
-| [ai-collection](https://github.com/ai-collection/ai-collection) | 8.9k+ | Generative AI landscape — application collection |
-| [awesome-generative-ai-apps](https://github.com/Anil-matcha/awesome-generative-ai-apps) | 379 | 50+ open-source generative AI apps (image, video, try-on) |
-| [awesome-skills](https://github.com/vivy-yi/awesome-skills) | 1 | 230+ curated AI agent skills |
-| [Awesome-AIGC](https://github.com/wshzd/Awesome-AIGC) | 867 | AIGC materials and learning resources (Chinese) |
+| 资源 | Stars | 焦点 |
+|------|:-----:|------|
+| [awesome-generative-ai-guide](https://github.com/aishwaryanr/awesome-generative-ai-guide) | 27k+ | 生成式 AI 研究、教程、Notebook |
+| [awesome-generative-ai](https://github.com/steven2358/awesome-generative-ai) | 12k+ | 现代生成式 AI 项目和服务 |
+| [awesome-generative-ai](https://github.com/filipecalegario/awesome-generative-ai) | 3k+ | 工具、模型、参考资源 |
+| [Awesome-AIGC-Tutorials](https://github.com/luban-agi/Awesome-AIGC-Tutorials) | 4.5k+ | LLM 和 AI 绘画教程 |
+| [ai-collection](https://github.com/ai-collection/ai-collection) | 8.9k+ | 生成式 AI 应用集合 |
+| [awesome-generative-ai-apps](https://github.com/Anil-matcha/awesome-generative-ai-apps) | 379 | 50+ 开源生成式 AI 应用（图像、视频、试穿） |
+| [awesome-skills](https://github.com/vivy-yi/awesome-skills) | 1 | 230+ AI Agent Skills 精选列表 |
+| [Awesome-AIGC](https://github.com/wshzd/Awesome-AIGC) | 867 | AIGC 资料汇总（中文） |
 
-### 🖼️ Image Generation
+### 🖼️ 图像生成
 
-| Resource | Stars | Focus |
-|----------|:-----:|-------|
-| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | 80k+ | Node-based Stable Diffusion GUI |
+| 资源 | Stars | 焦点 |
+|------|:-----:|------|
+| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | 80k+ | 节点式 Stable Diffusion GUI |
 | [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) | 150k+ | SD Web UI |
-| [Fooocus](https://github.com/lllyasviel/Fooocus) | 43k+ | Image generation with minimal effort |
-| [Midjourney](https://www.midjourney.com) | — | AI image generation via Discord/web |
-| [FLUX](https://github.com/black-forest-labs/flux) | 20k+ | FLUX image generation models |
-| [Fooocus-API](https://github.com/mrhan1993/Fooocus-API) | 1k+ | API for Fooocus image generation |
-| [sdxl-emoji](https://github.com/google/sdxl-emoji) | 2k+ | SDXL emoji generation |
-| [IC-Light](https://github.com/lllyasviel/IC-Light) | 6k+ | Image relighting |
+| [Fooocus](https://github.com/lllyasviel/Fooocus) | 43k+ | 最简操作的图像生成 |
+| [Midjourney](https://www.midjourney.com) | — | Discord/Web AI 图像生成 |
+| [FLUX](https://github.com/black-forest-labs/flux) | 20k+ | FLUX 图像生成模型 |
+| [IC-Light](https://github.com/lllyasviel/IC-Light) | 6k+ | 图像重光照 |
 
-### 🎬 Video Generation
+### 🎬 视频生成
 
-| Resource | Stars | Focus |
-|----------|:-----:|-------|
-| [CogVideo](https://github.com/THUDM/CogVideo) | 7k+ | Text-to-video generation (Zhipu) |
-| [AnimateDiff](https://github.com/guoyww/AnimateDiff) | 10k+ | Animate your personalized text-to-image models |
+| 资源 | Stars | 焦点 |
+|------|:-----:|------|
+| [CogVideo](https://github.com/THUDM/CogVideo) | 7k+ | 文生视频（智谱） |
+| [AnimateDiff](https://github.com/guoyww/AnimateDiff) | 10k+ | 动画化你的个性化文生图模型 |
 | [SVD](https://github.com/Stability-AI/generative-models) | 25k+ | Stable Video Diffusion |
-| [ModelScope](https://github.com/modelscope/modelscope) | 8k+ | AI model hub with video generation models |
-| [Open-Sora](https://github.com/hpcaitech/Open-Sora) | 24k+ | Open-source video generation |
-| [Kling](https://kling.kuaishou.com) | — | Kling AI video generation (可灵) |
-| [Jimeng](https://jimeng.jianying.com) | — | Jimeng AI content generation (即梦) |
+| [Open-Sora](https://github.com/hpcaitech/Open-Sora) | 24k+ | 开源视频生成 |
+| [Kling](https://kling.kuaishou.com) | — | 可灵 AI 视频生成 |
+| [Jimeng](https://jimeng.jianying.com) | — | 即梦 AI 内容生成 |
 
-### 🎵 Audio & Music
+### 🎵 音频与音乐
 
-| Resource | Stars | Focus |
-|----------|:-----:|-------|
-| [Bark](https://github.com/suno-ai/bark) | 36k+ | Text-to-audio with Suno |
-| [XTTS](https://github.com/coqui-ai/TTS) | 36k+ | Text-to-speech with voice cloning |
-| [MusicGen](https://github.com/facebookresearch/audiocraft) | 23k+ | Music generation from Meta |
-| [RVC](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion) | 25k+ | Voice conversion |
-| [Whisper](https://github.com/openai/whisper) | 75k+ | Speech recognition |
-| [So-VITS-SVC](https://github.com/svc-develop-team/so-vits-svc) | 25k+ | Singing voice conversion |
+| 资源 | Stars | 焦点 |
+|------|:-----:|------|
+| [Bark](https://github.com/suno-ai/bark) | 36k+ | Suno 文生音频 |
+| [XTTS](https://github.com/coqui-ai/TTS) | 36k+ | 语音合成 + 声音克隆 |
+| [MusicGen](https://github.com/facebookresearch/audiocraft) | 23k+ | Meta 音乐生成 |
+| [RVC](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion) | 25k+ | 声音转换 |
+| [Whisper](https://github.com/openai/whisper) | 75k+ | 语音识别 |
+| [So-VITS-SVC](https://github.com/svc-develop-team/so-vits-svc) | 25k+ | 歌声转换 |
 
-### 🧩 Multimodal & Tools
+### 🧩 多模态与平台
 
-| Resource | Stars | Focus |
-|----------|:-----:|-------|
-| [MiniMax](https://www.minimaxi.com) | — | Multimodal AI platform (文本/图像/视频/语音/音乐) |
-| [Coze](https://www.coze.cn) | — | Agent builder platform (扣子) |
-| [Pippit](https://pippit.com) | — | AI content creation platform (小云雀) |
-| [Suno](https://suno.com) | — | AI music generation |
-| [Udio](https://www.udio.com) | — | AI music generation |
-| [Runway](https://runwayml.com) | — | AI video and image generation |
-| [Luma AI](https://lumalabs.ai) | — | AI video and 3D generation |
-| [HuggingFace](https://huggingface.co) | — | AI model hub & deployment |
+| 资源 | Stars | 焦点 |
+|------|:-----:|------|
+| [MiniMax](https://www.minimaxi.com) | — | 多模态 AI 平台 |
+| [Coze](https://www.coze.cn) | — | 智能体构建平台（扣子） |
+| [Pippit](https://pippit.com) | — | AI 内容创作平台（小云雀） |
+| [Suno](https://suno.com) | — | AI 音乐生成 |
+| [Udio](https://www.udio.com) | — | AI 音乐生成 |
+| [Runway](https://runwayml.com) | — | AI 视频和图像生成 |
+| [Luma AI](https://lumalabs.ai) | — | AI 视频和 3D 生成 |
+| [HuggingFace](https://huggingface.co) | — | AI 模型中心 |
 
-### 📚 Agent Skills Ecosystem
+### 📚 Agent Skills 生态
 
-| Resource | Stars | Focus |
-|----------|:-----:|-------|
-| [Agent Skills Specification](https://agentskills.io) | — | Open specification for AI agent skills |
-| [Skills CLI](https://github.com/vercel-labs/skills) | — | Universal CLI for installing agent skills |
-| [full-stack-skills](https://github.com/partme-ai/full-stack-skills) | — | 460+ skills for full-stack development |
-| [full-statck-skills](https://github.com/full-statck-skills) | — | 42+ skill package organization |
-| [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | — | Baoyu's curated AI agent skills |
+| 资源 | 焦点 |
+|------|------|
+| [Agent Skills Specification](https://agentskills.io) | AI Agent Skills 开放规范 |
+| [Skills CLI](https://github.com/vercel-labs/skills) | 通用 Agent Skills 安装 CLI |
+| [full-stack-skills](https://github.com/partme-ai/full-stack-skills) | 460+ 全栈开发技能 |
+| [full-statck-skills](https://github.com/full-statck-skills) | 42+ 技能包组织 |
+| [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | Baoyu 精选 AI Agent Skills |
 
-> 💡 **Contributing**: Found a great AIGC skill or resource? See [Contributing](#-contributing) below.
+> 💡 **贡献**：发现了优秀的 AIGC 技能或资源？请看[贡献指南](#-贡献指南)。
 
 ---
 
-## Architecture
+## 架构
 
-### How Skills Work
+### 技能工作原理
 
-Each skill follows the [Agent Skills Specification](https://agentskills.io):
+每个技能遵循 [Agent Skills 规范](https://agentskills.io)：
 
 ```
 <package>/
 ├── skills/
 │   ├── <skill-name>/
-│   │   ├── SKILL.md          # Required — loaded on-demand by AI agents
-│   │   ├── examples/         # Optional — usage examples
-│   │   ├── references/       # Optional — detailed reference docs
-│   │   └── scripts/          # Optional — executable scripts
+│   │   ├── SKILL.md          # 必需 — AI 智能体按需加载
+│   │   ├── examples/         # 可选 — 使用示例
+│   │   ├── references/       # 可选 — 详细参考文档
+│   │   └── scripts/          # 可选 — 可执行脚本
 │   └── ...
-├── .claude-plugin/           # Plugin metadata
+├── .claude-plugin/           # 插件元数据
 └── README.md
 ```
 
-### On-Demand Loading
+### 按需加载
 
-Skills use **progressive disclosure**:
-1. **At startup**: Only skill names and descriptions are loaded (minimal context)
-2. **On demand**: Full `SKILL.md` is loaded when the agent identifies a relevant task
-3. **Deep dive**: Reference files are read only when explicitly needed
+技能使用**渐进式披露**：
+1. **启动时**：仅加载技能名称和描述（最小上下文）
+2. **按需**：当智能体识别到相关任务时加载完整的 `SKILL.md`
+3. **深入**：仅在明确需要时读取参考文件
 
 ---
 
-## Ecosystem
+## 生态
 
-| Resource | Link |
-|----------|------|
-| **Skill Packages** | [github.com/full-aigc-skills](https://github.com/full-aigc-skills) |
-| **Full Stack Skills** | [github.com/partme-ai/full-stack-skills](https://github.com/partme-ai/full-stack-skills) |
-| **Agent Skills Spec** | [agentskills.io](https://agentskills.io) |
+| 资源 | 链接 |
+|------|------|
+| **技能包** | [github.com/full-aigc-skills](https://github.com/full-aigc-skills) |
+| **全栈技能** | [github.com/partme-ai/full-stack-skills](https://github.com/partme-ai/full-stack-skills) |
+| **Agent Skills 规范** | [agentskills.io](https://agentskills.io) |
 | **Skills CLI** | [github.com/vercel-labs/skills](https://github.com/vercel-labs/skills) |
-| **Skills Directory** | [skills.sh](https://skills.sh) |
 | **PartMe.AI** | [github.com/partme-ai](https://github.com/partme-ai) |
 
 ---
 
-## Contributing
+## 贡献指南
 
-We welcome contributions! You can contribute in two ways:
+欢迎贡献！有两种方式：
 
-### Add a new skill package
+### 添加新技能包
 
-1. Create a new repo under [full-aigc-skills](https://github.com/full-aigc-skills) org
-2. Follow the [Agent Skills Specification](https://agentskills.io)
-3. Submit a PR to update this README with your package link
+1. 在 [full-aigc-skills](https://github.com/full-aigc-skills) 组织下创建新仓库
+2. 按照 [Agent Skills 规范](https://agentskills.io) 构建
+3. 提交 PR 更新本 README 中的包链接
 
-### Add a community resource
+### 添加社区资源
 
-1. Fork this repo
-2. Add your resource to the [Community Resources](#-community-resources) section
-3. Submit a PR
+1. Fork 本仓库
+2. 在[社区资源](#-社区资源)部分添加你的资源
+3. 提交 PR
 
-See [AGENTS.md](AGENTS.md) for detailed guidelines on creating skills.
+详见 [AGENTS.md](AGENTS.md) 创建技能的详细指南。
 
 ---
 
-## License
+## 许可证
 
-Apache 2.0 — see [LICENSE](LICENSE).
+Apache 2.0 — 详见 [LICENSE](LICENSE)。
 
 ---
 
 <div align="center">
 
-**If this project helps you, please give us a ⭐️**
+**如果这个项目对你有帮助，请给我们一个 ⭐️**
 
 Made with ❤️ by PartMe.AI Team
 
