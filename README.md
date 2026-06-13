@@ -1,75 +1,314 @@
-# aigc-skills
+<div align="center">
 
-[中文](./README.zh.md) | English
+# Full AIGC Skills
 
-Curated skills for **domestic (China) AIGC generation platforms**: first-party platform integrations and prompt skills, plus optional sync from public upstream repos. Skills live under `skills/<group>-skills/<skill-name>/`.
+**34+ Agent Skills. 6+ Skill Packages. One Ecosystem.**
 
-## Scope and boundaries
+*Image · Video · Audio · Music · Text · Multimodal — production-ready, independently installable AIGC skills.*
 
-- **This repo**: image, music, video, and related generation skills for domestic platforms (e.g. Jimeng, MiniMax, Pippit / 小云雀).
-- **[baoyu-skills](https://github.com/JimLiu/baoyu-skills)**: a separate skill ecosystem—install and use it directly; **do not** merge it here or add it to `sources.conf`.
-- **Overseas or generic creative tooling** (e.g. Remotion): only on explicit need, not the default expansion path.
+[![Stars](https://img.shields.io/github/stars/partme-ai/full-aigc-skills?style=social)](https://github.com/partme-ai/full-aigc-skills)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Compatible-purple)](https://agentskills.io)
 
-## Goals
+English | [简体中文](./README.zh-CN.md)
 
-- Organize skills under `skills/<group>-skills/<skill-name>/`.
-- Maintain multiple upstream sources in one config file.
-- Re-run sync with a single Bash script.
+[Introduction](#-introduction) ·
+[Install](#-install) ·
+[Skill Catalog](#-skill-catalog) ·
+[Community Resources](#-community-resources) ·
+[Architecture](#-architecture) ·
+[Contributing](#-contributing)
 
-## Layout
+</div>
 
-| Path | Purpose |
-|------|---------|
-| `skills/<group>-skills/<skill>/` | Grouped skill directories |
-| `config/sources.conf` | External source configuration |
-| `scripts/sync-sources.sh` | External sync script |
-| `docs/aigc-skill-group-mapping.md` | Group mapping table |
+---
+
+## Introduction
+
+**Full AIGC Skills** is the navigation hub for Agent Skills focused on AI-generated content — covering image generation, video creation, audio synthesis, music production, text generation, and multimodal workflows. All skills follow the [Agent Skills Specification](https://agentskills.io/) and are independently installable.
+
+This repo started as a monorepo for Chinese AIGC platform skills. In June 2026 we split into **6+ independent packages** under the [full-aigc-skills](https://github.com/full-aigc-skills) GitHub organization. This repo is now the catalog, navigation hub, and community resource center.
+
+> **Migration Complete (June 2026)**: All 34 skills have been migrated to individual repos under [full-aigc-skills](https://github.com/full-aigc-skills). This repo is now the catalog & navigation hub.
+
+### What We Cover
+
+| Domain | Problem | Solution |
+|--------|---------|----------|
+| **图像生成** | Text-to-image, image editing, style transfer | Dedicated prompt + CLI skills per platform |
+| **视频创作** | Text-to-video, image-to-video, video editing | Prompt engineering + API integration skills |
+| **音频/音乐** | TTS, music generation, sound effects | Multimodal toolkit + music production skills |
+| **文本生成** | LLM writing, translation, summarization | Platform-specific text generation skills |
+| **多模态融合** | Cross-modal tasks, multimodal dialogues | OCR, VLM, embedding, multimodal toolkit skills |
+
+---
 
 ## Install
 
-```bash
-npx skills add <owner>/aigc-skills
-```
-
-Register the plugin marketplace in supported agents:
+Install any skill package with one command:
 
 ```bash
-/plugin marketplace add <owner>/aigc-skills
+npx skills add full-aigc-skills/jimeng-skills   # 即梦 image & video (12 skills)
+npx skills add full-aigc-skills/zhipu-skills    # 智谱 text/image/video/audio (8 skills)
+npx skills add full-aigc-skills/coze-skills     # 扣子 ASR/TTS/image/search (6 skills)
 ```
 
-## Add a first-party skill
-
-1. Create `skills/<group>-skills/<skill-name>/SKILL.md`.
-2. Register the path in `.claude-plugin/marketplace.json`.
-3. Update `docs/aigc-skill-group-mapping.md`.
-
-See [docs/creating-skills.md](./docs/creating-skills.md).
-
-## Sync external skills
-
-1. Add one line to [config/sources.conf](./config/sources.conf).
-2. Run:
+Or install a specific skill from a package:
 
 ```bash
-./scripts/sync-sources.sh
+npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
 ```
 
-3. Register new skills in `.claude-plugin/marketplace.json`.
+---
 
-See [docs/syncing-sources.md](./docs/syncing-sources.md).
+## Skill Catalog
 
-## Commands
+### 即梦 (Jimeng) — 12 skills
 
-| Command | Description |
-|---------|-------------|
-| `./scripts/sync-sources.sh` | Sync all configured sources |
-| `./scripts/sync-sources.sh --source pippit` | Sync one source |
-| `./scripts/sync-sources.sh --dry-run` | Preview sync |
-| `./scripts/sync-sources.sh --force` | Force refresh cached repositories |
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [jimeng-prompt-text2image](https://github.com/full-aigc-skills/jimeng-skills) | 文生图提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image` |
+| [jimeng-prompt-text2video](https://github.com/full-aigc-skills/jimeng-skills) | 文生视频提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2video` |
+| [jimeng-prompt-image2image](https://github.com/full-aigc-skills/jimeng-skills) | 图生图提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-image2image` |
+| [jimeng-prompt-image2video](https://github.com/full-aigc-skills/jimeng-skills) | 图生视频提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-image2video` |
+| [jimeng-cli-text2image](https://github.com/full-aigc-skills/jimeng-skills) | 文生图 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-text2image` |
+| [jimeng-cli-text2video](https://github.com/full-aigc-skills/jimeng-skills) | 文生视频 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-text2video` |
+| [jimeng-cli-image2image](https://github.com/full-aigc-skills/jimeng-skills) | 图生图 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-image2image` |
+| [jimeng-cli-image2video](https://github.com/full-aigc-skills/jimeng-skills) | 图生视频 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-image2video` |
+| [jimeng-opencli-*](https://github.com/full-aigc-skills/jimeng-skills) | 浏览器编排（4 个技能） | `npx skills add full-aigc-skills/jimeng-skills` |
 
-## Current groups
+### 可灵 (Kling) — 2 skills
 
-- `jimeng-skills`: Jimeng prompts, dreamina CLI, and opencli browser orchestration (`jimeng-cli-*` / `jimeng-opencli-*`)
-- `pippit-skills`: Pippit / 小云雀 session skills with upstream README at the group root
-- `minimax-skills`: MiniMax multimodal and music skills (only the three configured skills are synced)
-- `remotion-skills`: Remotion video creation best practices (from [remotion-dev/skills](https://github.com/remotion-dev/skills))
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [kling-prompt](https://github.com/full-aigc-skills/kling-skills) | 可灵视频提示词工程 | `npx skills add full-aigc-skills/kling-skills --skill kling-prompt` |
+| [kling-video](https://github.com/full-aigc-skills/kling-skills) | 可灵视频生成 | `npx skills add full-aigc-skills/kling-skills --skill kling-video` |
+
+### 智谱 (Zhipu) — 8 skills
+
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [zhipu-text](https://github.com/full-aigc-skills/zhipu-skills) | 文本生成 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-text` |
+| [zhipu-image-generation](https://github.com/full-aigc-skills/zhipu-skills) | 图像生成 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-image-generation` |
+| [zhipu-video-generation](https://github.com/full-aigc-skills/zhipu-skills) | 视频生成 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-video-generation` |
+| [zhipu-audio](https://github.com/full-aigc-skills/zhipu-skills) | 语音合成/识别 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-audio` |
+| [zhipu-ocr](https://github.com/full-aigc-skills/zhipu-skills) | 文字识别 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-ocr` |
+| [zhipu-vlm](https://github.com/full-aigc-skills/zhipu-skills) | 视觉语言模型 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-vlm` |
+| [zhipu-embedding](https://github.com/full-aigc-skills/zhipu-skills) | 向量嵌入 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-embedding` |
+| [zhipu-humanoid](https://github.com/full-aigc-skills/zhipu-skills) | 数字人 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-humanoid` |
+
+### MiniMax — 3 skills
+
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [minimax-multimodal-toolkit](https://github.com/full-aigc-skills/minimax-skills) | 多模态工具集 | `npx skills add full-aigc-skills/minimax-skills --skill minimax-multimodal-toolkit` |
+| [minimax-music-gen](https://github.com/full-aigc-skills/minimax-skills) | 音乐生成 | `npx skills add full-aigc-skills/minimax-skills --skill minimax-music-gen` |
+| [minimax-music-playlist](https://github.com/full-aigc-skills/minimax-skills) | 音乐播放列表生成 | `npx skills add full-aigc-skills/minimax-skills --skill minimax-music-playlist` |
+
+### 扣子 (Coze) — 6 skills
+
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [coze-asr](https://github.com/full-aigc-skills/coze-skills) | 语音识别 | `npx skills add full-aigc-skills/coze-skills --skill coze-asr` |
+| [coze-tts](https://github.com/full-aigc-skills/coze-skills) | 语音合成 | `npx skills add full-aigc-skills/coze-skills --skill coze-tts` |
+| [coze-voice-gen](https://github.com/full-aigc-skills/coze-skills) | 声音克隆/生成 | `npx skills add full-aigc-skills/coze-skills --skill coze-voice-gen` |
+| [coze-image-gen](https://github.com/full-aigc-skills/coze-skills) | 图像生成 | `npx skills add full-aigc-skills/coze-skills --skill coze-image-gen` |
+| [coze-web-fetch](https://github.com/full-aigc-skills/coze-skills) | 网页抓取 | `npx skills add full-aigc-skills/coze-skills --skill coze-web-fetch` |
+| [coze-web-search](https://github.com/full-aigc-skills/coze-skills) | 网页搜索 | `npx skills add full-aigc-skills/coze-skills --skill coze-web-search` |
+
+### 小云雀 (Pippit) — 1 skill
+
+| Skill | Description | Install |
+|-------|-------------|---------|
+| [xyq-nest-skill](https://github.com/full-aigc-skills/pippit-skills) | 文生图/视频、风格转换、短剧MV | `npx skills add full-aigc-skills/pippit-skills` |
+
+---
+
+## Community Resources
+
+In addition to our own skill packages, we track the best AIGC resources across the ecosystem.
+
+### 🌟 Awesome Lists
+
+| Resource | Stars | Focus |
+|----------|:-----:|-------|
+| [awesome-generative-ai-guide](https://github.com/aishwaryanr/awesome-generative-ai-guide) | 27k+ | Comprehensive generative AI research, tutorials, notebooks |
+| [awesome-generative-ai](https://github.com/steven2358/awesome-generative-ai) | 12k+ | Modern generative AI projects and services |
+| [awesome-generative-ai](https://github.com/filipecalegario/awesome-generative-ai) | 3k+ | Tools, works, models, references |
+| [Awesome-AIGC-Tutorials](https://github.com/luban-agi/Awesome-AIGC-Tutorials) | 4.5k+ | LLM and AI painting tutorials |
+| [ai-collection](https://github.com/ai-collection/ai-collection) | 8.9k+ | Generative AI landscape — application collection |
+| [awesome-generative-ai-apps](https://github.com/Anil-matcha/awesome-generative-ai-apps) | 379 | 50+ open-source generative AI apps (image, video, try-on) |
+| [awesome-skills](https://github.com/vivy-yi/awesome-skills) | 1 | 230+ curated AI agent skills |
+| [Awesome-AIGC](https://github.com/wshzd/Awesome-AIGC) | 867 | AIGC materials and learning resources (Chinese) |
+
+### 🖼️ Image Generation
+
+| Resource | Stars | Focus |
+|----------|:-----:|-------|
+| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | 80k+ | Node-based Stable Diffusion GUI |
+| [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) | 150k+ | SD Web UI |
+| [Fooocus](https://github.com/lllyasviel/Fooocus) | 43k+ | Image generation with minimal effort |
+| [Midjourney](https://www.midjourney.com) | — | AI image generation via Discord/web |
+| [FLUX](https://github.com/black-forest-labs/flux) | 20k+ | FLUX image generation models |
+| [Fooocus-API](https://github.com/mrhan1993/Fooocus-API) | 1k+ | API for Fooocus image generation |
+| [sdxl-emoji](https://github.com/google/sdxl-emoji) | 2k+ | SDXL emoji generation |
+| [IC-Light](https://github.com/lllyasviel/IC-Light) | 6k+ | Image relighting |
+
+### 🎬 Video Generation
+
+| Resource | Stars | Focus |
+|----------|:-----:|-------|
+| [CogVideo](https://github.com/THUDM/CogVideo) | 7k+ | Text-to-video generation (Zhipu) |
+| [AnimateDiff](https://github.com/guoyww/AnimateDiff) | 10k+ | Animate your personalized text-to-image models |
+| [SVD](https://github.com/Stability-AI/generative-models) | 25k+ | Stable Video Diffusion |
+| [ModelScope](https://github.com/modelscope/modelscope) | 8k+ | AI model hub with video generation models |
+| [Open-Sora](https://github.com/hpcaitech/Open-Sora) | 24k+ | Open-source video generation |
+| [Kling](https://kling.kuaishou.com) | — | Kling AI video generation (可灵) |
+| [Jimeng](https://jimeng.jianying.com) | — | Jimeng AI content generation (即梦) |
+
+### 🎵 Audio & Music
+
+| Resource | Stars | Focus |
+|----------|:-----:|-------|
+| [Bark](https://github.com/suno-ai/bark) | 36k+ | Text-to-audio with Suno |
+| [XTTS](https://github.com/coqui-ai/TTS) | 36k+ | Text-to-speech with voice cloning |
+| [MusicGen](https://github.com/facebookresearch/audiocraft) | 23k+ | Music generation from Meta |
+| [RVC](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion) | 25k+ | Voice conversion |
+| [Whisper](https://github.com/openai/whisper) | 75k+ | Speech recognition |
+| [So-VITS-SVC](https://github.com/svc-develop-team/so-vits-svc) | 25k+ | Singing voice conversion |
+
+### 🧩 Multimodal & Tools
+
+| Resource | Stars | Focus |
+|----------|:-----:|-------|
+| [MiniMax](https://www.minimaxi.com) | — | Multimodal AI platform (文本/图像/视频/语音/音乐) |
+| [Coze](https://www.coze.cn) | — | Agent builder platform (扣子) |
+| [Pippit](https://pippit.com) | — | AI content creation platform (小云雀) |
+| [Suno](https://suno.com) | — | AI music generation |
+| [Udio](https://www.udio.com) | — | AI music generation |
+| [Runway](https://runwayml.com) | — | AI video and image generation |
+| [Luma AI](https://lumalabs.ai) | — | AI video and 3D generation |
+| [HuggingFace](https://huggingface.co) | — | AI model hub & deployment |
+
+### 📚 Agent Skills Ecosystem
+
+| Resource | Stars | Focus |
+|----------|:-----:|-------|
+| [Agent Skills Specification](https://agentskills.io) | — | Open specification for AI agent skills |
+| [Skills CLI](https://github.com/vercel-labs/skills) | — | Universal CLI for installing agent skills |
+| [full-stack-skills](https://github.com/partme-ai/full-stack-skills) | — | 460+ skills for full-stack development |
+| [full-statck-skills](https://github.com/full-statck-skills) | — | 42+ skill package organization |
+| [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | — | Baoyu's curated AI agent skills |
+
+> 💡 **Contributing**: Found a great AIGC skill or resource? See [Contributing](#-contributing) below.
+
+---
+
+## Architecture
+
+### How Skills Work
+
+Each skill follows the [Agent Skills Specification](https://agentskills.io):
+
+```
+<package>/
+├── skills/
+│   ├── <skill-name>/
+│   │   ├── SKILL.md          # Required — loaded on-demand by AI agents
+│   │   ├── examples/         # Optional — usage examples
+│   │   ├── references/       # Optional — detailed reference docs
+│   │   └── scripts/          # Optional — executable scripts
+│   └── ...
+├── .claude-plugin/           # Plugin metadata
+└── README.md
+```
+
+### On-Demand Loading
+
+Skills use **progressive disclosure**:
+1. **At startup**: Only skill names and descriptions are loaded (minimal context)
+2. **On demand**: Full `SKILL.md` is loaded when the agent identifies a relevant task
+3. **Deep dive**: Reference files are read only when explicitly needed
+
+### Skill Package Organization
+
+| Package | Platform | Skills | Description |
+|---------|----------|:------:|-------------|
+| [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | 即梦 (Jimeng) | 12 | 文生图/视频, CLI + Prompt 双通道 |
+| [kling-skills](https://github.com/full-aigc-skills/kling-skills) | 可灵 (Kling) | 2 | 视频提示词工程 |
+| [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | 智谱 (Zhipu) | 8 | 文本/图像/视频/音频/OCR/VLM |
+| [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | MiniMax | 3 | 多模态 + 音乐生成 |
+| [coze-skills](https://github.com/full-aigc-skills/coze-skills) | 扣子 (Coze) | 6 | ASR/TTS/图像/搜索 |
+| [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | 小云雀 (Pippit) | 1 | 文生图/视频、风格转换 |
+| **Total** | | **32** | |
+
+---
+
+## For Claude Code Users
+
+Install individual skill packages:
+
+```bash
+npx skills add full-aigc-skills/jimeng-skills   # 12 skills for 即梦
+npx skills add full-aigc-skills/zhipu-skills    # 8 skills for 智谱
+npx skills add full-aigc-skills/coze-skills     # 6 skills for 扣子
+npx skills add full-aigc-skills/minimax-skills  # 3 skills for MiniMax
+npx skills add full-aigc-skills/kling-skills    # 2 skills for 可灵
+npx skills add full-aigc-skills/pippit-skills   # 1 skill  for 小云雀
+```
+
+Or manually copy skills to your project:
+
+```bash
+git clone https://github.com/full-aigc-skills/<package>.git
+cp -r <package>/skills/* .claude/skills/
+```
+
+---
+
+## Ecosystem
+
+| Resource | Link |
+|----------|------|
+| **Skill Packages** | [github.com/full-aigc-skills](https://github.com/full-aigc-skills) |
+| **Full Stack Skills** | [github.com/partme-ai/full-stack-skills](https://github.com/partme-ai/full-stack-skills) |
+| **Agent Skills Spec** | [agentskills.io](https://agentskills.io) |
+| **Skills CLI** | [github.com/vercel-labs/skills](https://github.com/vercel-labs/skills) |
+| **Skills Directory** | [skills.sh](https://skills.sh) |
+| **PartMe.AI** | [github.com/partme-ai](https://github.com/partme-ai) |
+
+---
+
+## Contributing
+
+We welcome contributions! You can contribute in two ways:
+
+### Add a new skill package
+
+1. Create a new repo under [full-aigc-skills](https://github.com/full-aigc-skills) org
+2. Follow the [Agent Skills Specification](https://agentskills.io)
+3. Submit a PR to update this README with your package link
+
+### Add a community resource
+
+1. Fork this repo
+2. Add your resource to the [Community Resources](#-community-resources) section
+3. Submit a PR
+
+See [AGENTS.md](AGENTS.md) for detailed guidelines on creating skills.
+
+---
+
+## License
+
+Apache 2.0 — see [LICENSE](LICENSE).
+
+---
+
+<div align="center">
+
+**If this project helps you, please give us a ⭐️**
+
+Made with ❤️ by PartMe.AI Team
+
+</div>
