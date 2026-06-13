@@ -63,64 +63,15 @@ npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
 
 ## Skill Catalog
 
-### 即梦 (Jimeng) — 12 skills
-
-| Skill | Description | Install |
-|-------|-------------|---------|
-| [jimeng-prompt-text2image](https://github.com/full-aigc-skills/jimeng-skills) | 文生图提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image` |
-| [jimeng-prompt-text2video](https://github.com/full-aigc-skills/jimeng-skills) | 文生视频提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2video` |
-| [jimeng-prompt-image2image](https://github.com/full-aigc-skills/jimeng-skills) | 图生图提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-image2image` |
-| [jimeng-prompt-image2video](https://github.com/full-aigc-skills/jimeng-skills) | 图生视频提示词工程 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-image2video` |
-| [jimeng-cli-text2image](https://github.com/full-aigc-skills/jimeng-skills) | 文生图 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-text2image` |
-| [jimeng-cli-text2video](https://github.com/full-aigc-skills/jimeng-skills) | 文生视频 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-text2video` |
-| [jimeng-cli-image2image](https://github.com/full-aigc-skills/jimeng-skills) | 图生图 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-image2image` |
-| [jimeng-cli-image2video](https://github.com/full-aigc-skills/jimeng-skills) | 图生视频 CLI 执行 | `npx skills add full-aigc-skills/jimeng-skills --skill jimeng-cli-image2video` |
-| [jimeng-opencli-*](https://github.com/full-aigc-skills/jimeng-skills) | 浏览器编排（4 个技能） | `npx skills add full-aigc-skills/jimeng-skills` |
-
-### 可灵 (Kling) — 2 skills
-
-| Skill | Description | Install |
-|-------|-------------|---------|
-| [kling-prompt](https://github.com/full-aigc-skills/kling-skills) | 可灵视频提示词工程 | `npx skills add full-aigc-skills/kling-skills --skill kling-prompt` |
-| [kling-video](https://github.com/full-aigc-skills/kling-skills) | 可灵视频生成 | `npx skills add full-aigc-skills/kling-skills --skill kling-video` |
-
-### 智谱 (Zhipu) — 8 skills
-
-| Skill | Description | Install |
-|-------|-------------|---------|
-| [zhipu-text](https://github.com/full-aigc-skills/zhipu-skills) | 文本生成 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-text` |
-| [zhipu-image-generation](https://github.com/full-aigc-skills/zhipu-skills) | 图像生成 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-image-generation` |
-| [zhipu-video-generation](https://github.com/full-aigc-skills/zhipu-skills) | 视频生成 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-video-generation` |
-| [zhipu-audio](https://github.com/full-aigc-skills/zhipu-skills) | 语音合成/识别 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-audio` |
-| [zhipu-ocr](https://github.com/full-aigc-skills/zhipu-skills) | 文字识别 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-ocr` |
-| [zhipu-vlm](https://github.com/full-aigc-skills/zhipu-skills) | 视觉语言模型 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-vlm` |
-| [zhipu-embedding](https://github.com/full-aigc-skills/zhipu-skills) | 向量嵌入 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-embedding` |
-| [zhipu-humanoid](https://github.com/full-aigc-skills/zhipu-skills) | 数字人 | `npx skills add full-aigc-skills/zhipu-skills --skill zhipu-humanoid` |
-
-### MiniMax — 3 skills
-
-| Skill | Description | Install |
-|-------|-------------|---------|
-| [minimax-multimodal-toolkit](https://github.com/full-aigc-skills/minimax-skills) | 多模态工具集 | `npx skills add full-aigc-skills/minimax-skills --skill minimax-multimodal-toolkit` |
-| [minimax-music-gen](https://github.com/full-aigc-skills/minimax-skills) | 音乐生成 | `npx skills add full-aigc-skills/minimax-skills --skill minimax-music-gen` |
-| [minimax-music-playlist](https://github.com/full-aigc-skills/minimax-skills) | 音乐播放列表生成 | `npx skills add full-aigc-skills/minimax-skills --skill minimax-music-playlist` |
-
-### 扣子 (Coze) — 6 skills
-
-| Skill | Description | Install |
-|-------|-------------|---------|
-| [coze-asr](https://github.com/full-aigc-skills/coze-skills) | 语音识别 | `npx skills add full-aigc-skills/coze-skills --skill coze-asr` |
-| [coze-tts](https://github.com/full-aigc-skills/coze-skills) | 语音合成 | `npx skills add full-aigc-skills/coze-skills --skill coze-tts` |
-| [coze-voice-gen](https://github.com/full-aigc-skills/coze-skills) | 声音克隆/生成 | `npx skills add full-aigc-skills/coze-skills --skill coze-voice-gen` |
-| [coze-image-gen](https://github.com/full-aigc-skills/coze-skills) | 图像生成 | `npx skills add full-aigc-skills/coze-skills --skill coze-image-gen` |
-| [coze-web-fetch](https://github.com/full-aigc-skills/coze-skills) | 网页抓取 | `npx skills add full-aigc-skills/coze-skills --skill coze-web-fetch` |
-| [coze-web-search](https://github.com/full-aigc-skills/coze-skills) | 网页搜索 | `npx skills add full-aigc-skills/coze-skills --skill coze-web-search` |
-
-### 小云雀 (Pippit) — 1 skill
-
-| Skill | Description | Install |
-|-------|-------------|---------|
-| [xyq-nest-skill](https://github.com/full-aigc-skills/pippit-skills) | 文生图/视频、风格转换、短剧MV | `npx skills add full-aigc-skills/pippit-skills` |
+| Platform | Package | Skills | Install |
+|----------|---------|:------:|---------|
+| 🎨 **即梦 (Jimeng)** | [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | 12 | `npx skills add full-aigc-skills/jimeng-skills` |
+| 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | 2 | `npx skills add full-aigc-skills/kling-skills` |
+| 🧠 **智谱 (Zhipu)** | [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | 8 | `npx skills add full-aigc-skills/zhipu-skills` |
+| 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | 3 | `npx skills add full-aigc-skills/minimax-skills` |
+| 🤖 **扣子 (Coze)** | [coze-skills](https://github.com/full-aigc-skills/coze-skills) | 6 | `npx skills add full-aigc-skills/coze-skills` |
+| 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | 1 | `npx skills add full-aigc-skills/pippit-skills` |
+| **Total** | | **32** | |
 
 ---
 
@@ -229,40 +180,6 @@ Skills use **progressive disclosure**:
 1. **At startup**: Only skill names and descriptions are loaded (minimal context)
 2. **On demand**: Full `SKILL.md` is loaded when the agent identifies a relevant task
 3. **Deep dive**: Reference files are read only when explicitly needed
-
-### Skill Package Organization
-
-| Package | Platform | Skills | Description |
-|---------|----------|:------:|-------------|
-| [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | 即梦 (Jimeng) | 12 | 文生图/视频, CLI + Prompt 双通道 |
-| [kling-skills](https://github.com/full-aigc-skills/kling-skills) | 可灵 (Kling) | 2 | 视频提示词工程 |
-| [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | 智谱 (Zhipu) | 8 | 文本/图像/视频/音频/OCR/VLM |
-| [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | MiniMax | 3 | 多模态 + 音乐生成 |
-| [coze-skills](https://github.com/full-aigc-skills/coze-skills) | 扣子 (Coze) | 6 | ASR/TTS/图像/搜索 |
-| [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | 小云雀 (Pippit) | 1 | 文生图/视频、风格转换 |
-| **Total** | | **32** | |
-
----
-
-## For Claude Code Users
-
-Install individual skill packages:
-
-```bash
-npx skills add full-aigc-skills/jimeng-skills   # 12 skills for 即梦
-npx skills add full-aigc-skills/zhipu-skills    # 8 skills for 智谱
-npx skills add full-aigc-skills/coze-skills     # 6 skills for 扣子
-npx skills add full-aigc-skills/minimax-skills  # 3 skills for MiniMax
-npx skills add full-aigc-skills/kling-skills    # 2 skills for 可灵
-npx skills add full-aigc-skills/pippit-skills   # 1 skill  for 小云雀
-```
-
-Or manually copy skills to your project:
-
-```bash
-git clone https://github.com/full-aigc-skills/<package>.git
-cp -r <package>/skills/* .claude/skills/
-```
 
 ---
 
