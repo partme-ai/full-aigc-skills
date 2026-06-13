@@ -63,15 +63,16 @@ npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
 
 ## 技能目录
 
-| 平台 | 包 | 技能数 | 安装 |
-|------|---|:------:|------|
-| 🎨 **即梦 (Jimeng)** | [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | 12 | `npx skills add full-aigc-skills/jimeng-skills` |
-| 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | 2 | `npx skills add full-aigc-skills/kling-skills` |
-| 🧠 **智谱 (Zhipu)** | [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | 8 | `npx skills add full-aigc-skills/zhipu-skills` |
-| 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | 3 | `npx skills add full-aigc-skills/minimax-skills` |
-| 🤖 **扣子 (Coze)** | [coze-skills](https://github.com/full-aigc-skills/coze-skills) | 6 | `npx skills add full-aigc-skills/coze-skills` |
-| 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | 1 | `npx skills add full-aigc-skills/pippit-skills` |
-| **总计** | | **32** | |
+| 平台 | 包 | ⭐ Stars | 技能数 | 说明 | 安装 |
+|------|---|:------:|:------:|------|------|
+| 🌟 **Baoyu 精选** | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | 内容创作（信息图、幻灯片、漫画、封面）、AI 图像生成、YouTube 转录、URL 转 Markdown、翻译、发布 | `npx skills add JimLiu/baoyu-skills` |
+| 🎨 **即梦 (Jimeng)** | [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | — | 12 | 文生图/视频、图生图/视频，CLI + Prompt 双通道 | `npx skills add full-aigc-skills/jimeng-skills` |
+| 🧠 **智谱 (Zhipu)** | [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | — | 8 | 文本/图像/视频生成、语音合成、OCR、VLM、Embedding | `npx skills add full-aigc-skills/zhipu-skills` |
+| 🤖 **扣子 (Coze)** | [coze-skills](https://github.com/full-aigc-skills/coze-skills) | — | 6 | ASR 语音识别、TTS 语音合成、图像生成、声音克隆、网页抓取搜索 | `npx skills add full-aigc-skills/coze-skills` |
+| 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | — | 3 | 文本、图像、视频、语音、音乐生成，多模态工具集 | `npx skills add full-aigc-skills/minimax-skills` |
+| 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | — | 2 | 文生视频、图生视频提示词工程，涵盖戏剧结构、镜头语言 | `npx skills add full-aigc-skills/kling-skills` |
+| 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | — | 1 | 文生图/视频、风格转换、短剧MV生成 | `npx skills add full-aigc-skills/pippit-skills` |
+| **总计** | | | **53** | | |
 
 ---
 
