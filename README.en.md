@@ -63,16 +63,16 @@ npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
 
 ## Skill Catalog
 
-| Platform | Package | ⭐ Stars | Skills | Description | Install |
-|----------|---------|:------:|:------:|-------------|---------|
-| 🌟 **Baoyu's Picks** | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | Content creation (infographics, slides, comics, covers), AI image gen, YouTube transcript, URL-to-Markdown, translation, publishing | `npx skills add JimLiu/baoyu-skills` |
-| 🎨 **即梦 (Jimeng)** | [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | — | 12 | Text/image-to-image/video, CLI + Prompt dual-channel | `npx skills add full-aigc-skills/jimeng-skills` |
-| 🧠 **智谱 (Zhipu)** | [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | — | 8 | Text/image/video gen, TTS, OCR, VLM, Embedding | `npx skills add full-aigc-skills/zhipu-skills` |
-| 🤖 **扣子 (Coze)** | [coze-skills](https://github.com/full-aigc-skills/coze-skills) | — | 6 | ASR, TTS, image gen, voice cloning, web fetch & search | `npx skills add full-aigc-skills/coze-skills` |
-| 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | — | 3 | Text, image, video, speech, music generation | `npx skills add full-aigc-skills/minimax-skills` |
-| 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | — | 2 | Text/image-to-video prompt engineering | `npx skills add full-aigc-skills/kling-skills` |
-| 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | — | 1 | Text/image-to-video, style transfer, short drama MV | `npx skills add full-aigc-skills/pippit-skills` |
-| **Total** | | | **53** | | |
+| Platform | Package | ⭐ Stars | Skills | Install |
+|----------|---------|:------:|:------:|---------|
+| 🌟 **Baoyu's Picks** | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | `npx skills add JimLiu/baoyu-skills` |
+| 🎨 **即梦 (Jimeng)** | [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | — | 12 | `npx skills add full-aigc-skills/jimeng-skills` |
+| 🧠 **智谱 (Zhipu)** | [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | — | 8 | `npx skills add full-aigc-skills/zhipu-skills` |
+| 🤖 **扣子 (Coze)** | [coze-skills](https://github.com/full-aigc-skills/coze-skills) | — | 6 | `npx skills add full-aigc-skills/coze-skills` |
+| 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | — | 3 | `npx skills add full-aigc-skills/minimax-skills` |
+| 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | — | 2 | `npx skills add full-aigc-skills/kling-skills` |
+| 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | — | 1 | `npx skills add full-aigc-skills/pippit-skills` |
+| **Total** | | | **53** | |
 
 ---
 
