@@ -72,7 +72,8 @@ npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
 | 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | — | 3 | `npx skills add full-aigc-skills/minimax-skills` |
 | 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | — | 2 | `npx skills add full-aigc-skills/kling-skills` |
 | 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | — | 1 | `npx skills add full-aigc-skills/pippit-skills` |
-| **Total** | | | **53** | |
+| 📊 **ProcessOn** | [processon-skills](https://github.com/processonai/processon-skills) | 15 | 3 | `npx skills add https://github.com/processonai/processon-skills.git` |
+| **Total** | | | **56** | |
 
 ---
 
