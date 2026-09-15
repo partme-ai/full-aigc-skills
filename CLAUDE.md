@@ -23,12 +23,21 @@ LICENSE            # Apache 2.0
 
 | 包 | 平台 | 技能数 | 安装 |
 |----|------|:------:|------|
-| jimeng-skills | 即梦 | 12 | `npx skills add full-aigc-skills/jimeng-skills` |
-| kling-skills | 可灵 | 2 | `npx skills add full-aigc-skills/kling-skills` |
-| zhipu-skills | 智谱 | 8 | `npx skills add full-aigc-skills/zhipu-skills` |
+| baoyu-skills | Baoyu 精选 | 21 | `npx skills add JimLiu/baoyu-skills` |
+| dreamina-skills | 即梦 图像/视频/3D | 36 | `npx skills add full-aigc-skills/dreamina-skills` |
+| blender-skills | Blender 制作 | 23 | `npx skills add full-aigc-skills/blender-skills` |
+| zhipu-skills | 智谱 文本/图像/视频/音频 | 8 | `npx skills add full-aigc-skills/zhipu-skills` |
+| coze-skills | 扣子 ASR/TTS/图像/搜索 | 6 | `npx skills add full-aigc-skills/coze-skills` |
+| video-factory-skills | 视频工厂 | 5 | `npx skills add full-aigc-skills/video-factory-skills` |
+| image-factory-skills | 图片工厂 | 4 | `npx skills add full-aigc-skills/image-factory-skills` |
+| maya-skills | Maya 制作 | 4 | `npx skills add full-aigc-skills/maya-skills` |
 | minimax-skills | MiniMax | 3 | `npx skills add full-aigc-skills/minimax-skills` |
-| coze-skills | 扣子 | 6 | `npx skills add full-aigc-skills/coze-skills` |
+| kling-skills | 可灵 视频 | 2 | `npx skills add full-aigc-skills/kling-skills` |
+| reelbench-skills | ReelBench | 2 | `npx skills add full-aigc-skills/reelbench-skills` |
 | pippit-skills | 小云雀 | 1 | `npx skills add full-aigc-skills/pippit-skills` |
+| id-photo-skills | 证件照 | 1 | `npx skills add full-aigc-skills/id-photo-skills` |
+
+**总计：13 个包 / 116 个技能**（实测自上游 `main` 分支）。
 
 ## 修改规则
 

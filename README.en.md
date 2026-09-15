@@ -2,7 +2,7 @@
 
 # Full AIGC Skills
 
-**34+ Agent Skills. 6+ Skill Packages. One Ecosystem.**
+**100+ Agent Skills. 13 Skill Packages. One Ecosystem.**
 
 *Image · Video · Audio · Music · Text · Multimodal — production-ready, independently installable AIGC skills.*
 
@@ -27,9 +27,9 @@
 
 **Full AIGC Skills** is the navigation hub for Agent Skills focused on AI-generated content — covering image generation, video creation, audio synthesis, music production, text generation, and multimodal workflows. All skills follow the [Agent Skills Specification](https://agentskills.io/) and are independently installable.
 
-This repo started as a monorepo for Chinese AIGC platform skills. In June 2026 we split into **6+ independent packages** under the [full-aigc-skills](https://github.com/full-aigc-skills) GitHub organization. This repo is now the catalog, navigation hub, and community resource center.
+This repo started as a monorepo for Chinese AIGC platform skills. In June 2026 we split into **13 independent packages** under the [full-aigc-skills](https://github.com/full-aigc-skills) GitHub organization. This repo is now the catalog, navigation hub, and community resource center.
 
-> **Migration Complete (June 2026)**: All 34 skills have been migrated to individual repos under [full-aigc-skills](https://github.com/full-aigc-skills). This repo is now the catalog & navigation hub.
+> **Migration Complete (June 2026)**: All 116 skills have been migrated to individual repos under [full-aigc-skills](https://github.com/full-aigc-skills) and [partme-ai](https://github.com/partme-ai). This repo is now the catalog & navigation hub.
 
 ### What We Cover
 
@@ -48,15 +48,15 @@ This repo started as a monorepo for Chinese AIGC platform skills. In June 2026 w
 Install any skill package with one command:
 
 ```bash
-npx skills add full-aigc-skills/jimeng-skills   # 即梦 image & video (12 skills)
-npx skills add full-aigc-skills/zhipu-skills    # 智谱 text/image/video/audio (8 skills)
-npx skills add full-aigc-skills/coze-skills     # 扣子 ASR/TTS/image/search (6 skills)
+npx skills add full-aigc-skills/dreamina-skills  # Jimeng image, video & 3D (36 skills)
+npx skills add full-aigc-skills/zhipu-skills     # Zhipu text/image/video/audio (8 skills)
+npx skills add full-aigc-skills/coze-skills      # Coze ASR/TTS/image/search (6 skills)
 ```
 
 Or install a specific skill from a package:
 
 ```bash
-npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
+npx skills add full-aigc-skills/dreamina-skills --skill jimeng-prompt-text2image
 ```
 
 ---
@@ -66,13 +66,19 @@ npx skills add full-aigc-skills/jimeng-skills --skill jimeng-prompt-text2image
 | Platform | Package | ⭐ Stars | Skills | Install |
 |----------|---------|:------:|:------:|---------|
 | 🌟 **Baoyu's Picks** | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 21.4k | 21 | `npx skills add JimLiu/baoyu-skills` |
-| 🎨 **即梦 (Jimeng)** | [jimeng-skills](https://github.com/full-aigc-skills/jimeng-skills) | — | 12 | `npx skills add full-aigc-skills/jimeng-skills` |
+| 🎨 **即梦 (Jimeng)** | [dreamina-skills](https://github.com/full-aigc-skills/dreamina-skills) | — | 36 | `npx skills add full-aigc-skills/dreamina-skills` |
+| 🎬 **Blender production** | [blender-skills](https://github.com/full-aigc-skills/blender-skills) | — | 23 | `npx skills add full-aigc-skills/blender-skills` |
 | 🧠 **智谱 (Zhipu)** | [zhipu-skills](https://github.com/full-aigc-skills/zhipu-skills) | — | 8 | `npx skills add full-aigc-skills/zhipu-skills` |
 | 🤖 **扣子 (Coze)** | [coze-skills](https://github.com/full-aigc-skills/coze-skills) | — | 6 | `npx skills add full-aigc-skills/coze-skills` |
+| 🎞️ **Video factory** | [video-factory-skills](https://github.com/full-aigc-skills/video-factory-skills) | — | 5 | `npx skills add full-aigc-skills/video-factory-skills` |
+| 🖼️ **Image factory** | [image-factory-skills](https://github.com/full-aigc-skills/image-factory-skills) | — | 4 | `npx skills add full-aigc-skills/image-factory-skills` |
+| 🎬 **Maya production** | [maya-skills](https://github.com/full-aigc-skills/maya-skills) | — | 4 | `npx skills add full-aigc-skills/maya-skills` |
 | 🎵 **MiniMax** | [minimax-skills](https://github.com/full-aigc-skills/minimax-skills) | — | 3 | `npx skills add full-aigc-skills/minimax-skills` |
 | 🎬 **可灵 (Kling)** | [kling-skills](https://github.com/full-aigc-skills/kling-skills) | — | 2 | `npx skills add full-aigc-skills/kling-skills` |
+| 📽️ **ReelBench** | [reelbench-skills](https://github.com/full-aigc-skills/reelbench-skills) | — | 2 | `npx skills add full-aigc-skills/reelbench-skills` |
 | 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | — | 1 | `npx skills add full-aigc-skills/pippit-skills` |
-| **Total** | | | **53** | |
+| 📷 **ID Photo** | [id-photo-skills](https://github.com/full-aigc-skills/id-photo-skills) | — | 1 | `npx skills add full-aigc-skills/id-photo-skills` |
+| **Total** | | | **116** | |
 
 ---
 
@@ -148,7 +154,7 @@ In addition to our own skill packages, we track the best AIGC resources across t
 |----------|:-----:|-------|
 | [Agent Skills Specification](https://agentskills.io) | — | Open specification for AI agent skills |
 | [Skills CLI](https://github.com/vercel-labs/skills) | — | Universal CLI for installing agent skills |
-| [full-stack-skills](https://github.com/partme-ai/full-stack-skills) | — | 460+ skills for full-stack development |
+| [full-stack-skills](https://github.com/partme-ai/full-stack-skills) | — | 690+ skills for full-stack development (51 packages) |
 | [full-statck-skills](https://github.com/full-statck-skills) | — | 42+ skill package organization |
 | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | — | Baoyu's curated AI agent skills |
 
