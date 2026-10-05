@@ -12,14 +12,30 @@
 
 [简体中文](./README.md)
 
-[Introduction](#-introduction) ·
-[Install](#-install) ·
-[Skill Catalog](#-skill-catalog) ·
-[Community Resources](#-community-resources) ·
-[Architecture](#-architecture) ·
-[Contributing](#-contributing)
+[Introduction](#introduction) ·
+[Install](#install) ·
+[Skill Catalog](#skill-catalog) ·
+[Community Resources](#community-resources) ·
+[Architecture](#architecture) ·
+[Contributing](#contributing)
 
 </div>
+
+<!-- ecosystem-navigation:start -->
+
+## Ecosystem navigation
+
+Choose the entry that matches your task: skills provide reusable guidance; plugins connect tools and workflows. Install only what you need.
+
+| Area | Use it for | Catalog / installation | Organization |
+| --- | --- | --- | --- |
+| Full Stack Skills | Software development, architecture, testing, and operations | [PartMe.AI / full-stack-skills](https://github.com/partme-ai/full-stack-skills) | [full-stack-skills](https://github.com/full-stack-skills) |
+| Full AIGC Skills | Image, video, audio, and other content creation | [PartMe.AI / full-aigc-skills](https://github.com/partme-ai/full-aigc-skills) | [full-aigc-skills](https://github.com/full-aigc-skills) |
+| Full Stack Plugins | Tools and workflows for development and operations | [PartMe.AI / full-stack-plugins](https://github.com/partme-ai/full-stack-plugins) | [full-stack-plugins](https://github.com/full-stack-plugins) |
+| Full AIGC Plugins | Tools and workflows for content production | [PartMe.AI / full-aigc-plugins](https://github.com/partme-ai/full-aigc-plugins) | [full-aigc-plugins](https://github.com/full-aigc-plugins) |
+
+<!-- ecosystem-navigation:end -->
+
 
 ---
 
@@ -158,7 +174,7 @@ In addition to our own skill packages, we track the best AIGC resources across t
 | [full-statck-skills](https://github.com/full-statck-skills) | — | 42+ skill package organization |
 | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | — | Baoyu's curated AI agent skills |
 
-> 💡 **Contributing**: Found a great AIGC skill or resource? See [Contributing](#-contributing) below.
+> 💡 **Contributing**: Found a great AIGC skill or resource? See [Contributing](#contributing) below.
 
 ---
 
@@ -216,10 +232,10 @@ We welcome contributions! You can contribute in two ways:
 ### Add a community resource
 
 1. Fork this repo
-2. Add your resource to the [Community Resources](#-community-resources) section
+2. Add your resource to the [Community Resources](#community-resources) section
 3. Submit a PR
 
-See [AGENTS.md](AGENTS.md) for detailed guidelines on creating skills.
+Follow the [Agent Skills specification](https://agentskills.io/) when creating skills.
 
 ---
 

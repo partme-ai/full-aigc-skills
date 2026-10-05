@@ -12,14 +12,30 @@
 
 [English](./README.en.md)
 
-[简介](#-简介) ·
-[安装](#-安装) ·
-[技能目录](#-技能目录) ·
-[社区资源](#-社区资源) ·
-[架构](#-架构) ·
-[贡献](#-贡献指南)
+[简介](#简介) ·
+[安装](#安装) ·
+[技能目录](#技能目录) ·
+[社区资源](#社区资源) ·
+[架构](#架构) ·
+[贡献](#贡献指南)
 
 </div>
+
+<!-- ecosystem-navigation:start -->
+
+## 生态导航
+
+按当前任务选择入口：技能提供可复用的知识与操作指引，插件连接工具与工作流。各项目可以独立使用，按需安装即可。
+
+| 方向 | 适用任务 | 目录与安装 | 组织 |
+| --- | --- | --- | --- |
+| Full Stack Skills | 软件开发、架构设计、测试与运维 | [PartMe.AI / full-stack-skills](https://github.com/partme-ai/full-stack-skills) | [full-stack-skills](https://github.com/full-stack-skills) |
+| Full AIGC Skills | 图像、视频、音频等内容创作 | [PartMe.AI / full-aigc-skills](https://github.com/partme-ai/full-aigc-skills) | [full-aigc-skills](https://github.com/full-aigc-skills) |
+| Full Stack Plugins | 研发与运维的工具集成和工作流 | [PartMe.AI / full-stack-plugins](https://github.com/partme-ai/full-stack-plugins) | [full-stack-plugins](https://github.com/full-stack-plugins) |
+| Full AIGC Plugins | 内容制作的工具集成和生成工作流 | [PartMe.AI / full-aigc-plugins](https://github.com/partme-ai/full-aigc-plugins) | [full-aigc-plugins](https://github.com/full-aigc-plugins) |
+
+<!-- ecosystem-navigation:end -->
+
 
 ---
 
@@ -155,7 +171,7 @@ npx skills add full-aigc-skills/dreamina-skills --skill jimeng-prompt-text2image
 | [full-statck-skills](https://github.com/full-statck-skills) | 42+ 技能包组织 |
 | [baoyu-skills](https://github.com/JimLiu/baoyu-skills) | Baoyu 精选 AI Agent Skills |
 
-> 💡 **贡献**：发现了优秀的 AIGC 技能或资源？请看[贡献指南](#-贡献指南)。
+> 💡 **贡献**：发现了优秀的 AIGC 技能或资源？请看[贡献指南](#贡献指南)。
 
 ---
 
@@ -212,10 +228,10 @@ npx skills add full-aigc-skills/dreamina-skills --skill jimeng-prompt-text2image
 ### 添加社区资源
 
 1. Fork 本仓库
-2. 在[社区资源](#-社区资源)部分添加你的资源
+2. 在[社区资源](#社区资源)部分添加你的资源
 3. 提交 PR
 
-详见 [AGENTS.md](AGENTS.md) 创建技能的详细指南。
+创建技能时请遵循 [Agent Skills 规范](https://agentskills.io/)。
 
 ---
 
