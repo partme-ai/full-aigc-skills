@@ -43,6 +43,30 @@ This repo started as a monorepo for Chinese AIGC platform skills. In June 2026 w
 
 ---
 
+## Ecosystem
+
+<!-- ecosystem-navigation:start -->
+
+| Area | Use it for | Catalog / installation | Organization |
+| --- | --- | --- | --- |
+| Full Stack Skills | Software development, architecture, testing, and operations | [PartMe.AI / full-stack-skills](https://github.com/partme-ai/full-stack-skills) | [full-stack-skills](https://github.com/full-stack-skills) |
+| Full AIGC Skills | Image, video, audio, and other content creation | [PartMe.AI / full-aigc-skills](https://github.com/partme-ai/full-aigc-skills) | [full-aigc-skills](https://github.com/full-aigc-skills) |
+| Full Stack Plugins | Tools and workflows for development and operations | [PartMe.AI / full-stack-plugins](https://github.com/partme-ai/full-stack-plugins) | [full-stack-plugins](https://github.com/full-stack-plugins) |
+| Full AIGC Plugins | Tools and workflows for content production | [PartMe.AI / full-aigc-plugins](https://github.com/partme-ai/full-aigc-plugins) | [full-aigc-plugins](https://github.com/full-aigc-plugins) |
+
+<!-- ecosystem-navigation:end -->
+
+### Related resources
+
+| Resource | Link |
+|----------|------|
+| **Agent Skills Spec** | [agentskills.io](https://agentskills.io) |
+| **Skills CLI** | [github.com/vercel-labs/skills](https://github.com/vercel-labs/skills) |
+| **Skills Directory** | [skills.sh](https://skills.sh) |
+| **PartMe.AI** | [github.com/partme-ai](https://github.com/partme-ai) |
+
+---
+
 ## Install
 
 Install any skill package with one command:
@@ -187,30 +211,6 @@ Skills use **progressive disclosure**:
 1. **At startup**: Only skill names and descriptions are loaded (minimal context)
 2. **On demand**: Full `SKILL.md` is loaded when the agent identifies a relevant task
 3. **Deep dive**: Reference files are read only when explicitly needed
-
----
-
-## Ecosystem
-
-<!-- ecosystem-navigation:start -->
-
-| Area | Use it for | Catalog / installation | Organization |
-| --- | --- | --- | --- |
-| Full Stack Skills | Software development, architecture, testing, and operations | [PartMe.AI / full-stack-skills](https://github.com/partme-ai/full-stack-skills) | [full-stack-skills](https://github.com/full-stack-skills) |
-| Full AIGC Skills | Image, video, audio, and other content creation | [PartMe.AI / full-aigc-skills](https://github.com/partme-ai/full-aigc-skills) | [full-aigc-skills](https://github.com/full-aigc-skills) |
-| Full Stack Plugins | Tools and workflows for development and operations | [PartMe.AI / full-stack-plugins](https://github.com/partme-ai/full-stack-plugins) | [full-stack-plugins](https://github.com/full-stack-plugins) |
-| Full AIGC Plugins | Tools and workflows for content production | [PartMe.AI / full-aigc-plugins](https://github.com/partme-ai/full-aigc-plugins) | [full-aigc-plugins](https://github.com/full-aigc-plugins) |
-
-<!-- ecosystem-navigation:end -->
-
-### Related resources
-
-| Resource | Link |
-|----------|------|
-| **Agent Skills Spec** | [agentskills.io](https://agentskills.io) |
-| **Skills CLI** | [github.com/vercel-labs/skills](https://github.com/vercel-labs/skills) |
-| **Skills Directory** | [skills.sh](https://skills.sh) |
-| **PartMe.AI** | [github.com/partme-ai](https://github.com/partme-ai) |
 
 ---
 
