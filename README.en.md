@@ -102,7 +102,8 @@ npx skills add full-aigc-skills/dreamina-skills --skill jimeng-prompt-text2image
 | 📽️ **ReelBench** | [reelbench-skills](https://github.com/full-aigc-skills/reelbench-skills) | — | 2 | `npx skills add full-aigc-skills/reelbench-skills` |
 | 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | — | 1 | `npx skills add full-aigc-skills/pippit-skills` |
 | 📷 **ID Photo** | [id-photo-skills](https://github.com/full-aigc-skills/id-photo-skills) | — | 1 | `npx skills add full-aigc-skills/id-photo-skills` |
-| **Total** | | | **116** | |
+| 📄 **PrintCraft (Prerelease)** | [printcraft-skills](https://github.com/full-aigc-skills/printcraft-skills) | — | 6 | `npx skills add full-aigc-skills/printcraft-skills` |
+| **Total** | | | **122** | |
 
 ---
 
@@ -247,3 +248,5 @@ Apache 2.0 — see [LICENSE](LICENSE).
 Made with ❤️ by PartMe.AI Team
 
 </div>
+
+> PrintCraft v0.1.0-dev.5 is a controlled-testing prerelease with a pinned macOS arm64 native runtime. Chinese OCR, other native platforms and mobile acceptance remain open; see its release notes.

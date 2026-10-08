@@ -2,7 +2,7 @@
 
 # Full AIGC Skills
 
-**100+ 个 Agent Skills。13 个技能包。一个统一生态。**
+**100+ 个 Agent Skills。14 个技能包。一个统一生态。**
 
 *图像 · 视频 · 音频 · 音乐 · 文本 · 多模态 — 生产级品质，独立安装的 AIGC 技能。*
 
@@ -101,7 +101,8 @@ npx skills add full-aigc-skills/dreamina-skills --skill jimeng-prompt-text2image
 | 📽️ **ReelBench** | [reelbench-skills](https://github.com/full-aigc-skills/reelbench-skills) | — | 2 | `npx skills add full-aigc-skills/reelbench-skills` |
 | 🐦 **小云雀 (Pippit)** | [pippit-skills](https://github.com/full-aigc-skills/pippit-skills) | — | 1 | `npx skills add full-aigc-skills/pippit-skills` |
 | 📷 **证件照 (ID Photo)** | [id-photo-skills](https://github.com/full-aigc-skills/id-photo-skills) | — | 1 | `npx skills add full-aigc-skills/id-photo-skills` |
-| **总计** | | | **116** | |
+| 📄 **PrintCraft（预发布）** | [printcraft-skills](https://github.com/full-aigc-skills/printcraft-skills) | — | 6 | `npx skills add full-aigc-skills/printcraft-skills` |
+| **总计** | | | **122** | |
 
 ---
 
@@ -243,3 +244,5 @@ Apache 2.0 — 详见 [LICENSE](LICENSE)。
 Made with ❤️ by PartMe.AI Team
 
 </div>
+
+> PrintCraft 当前为 v0.1.0-dev.5 受控测试预发布，固定 macOS arm64 原生运行时；中文 OCR、其他原生平台及移动端验收仍开放。详见其发行说明。
