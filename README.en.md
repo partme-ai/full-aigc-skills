@@ -249,4 +249,4 @@ Made with ❤️ by PartMe.AI Team
 
 </div>
 
-> PrintCraft v0.1.0-dev.5 is a controlled-testing prerelease with a pinned macOS arm64 native runtime. Chinese OCR, other native platforms and mobile acceptance remain open; see its release notes.
+> PrintCraft v0.1.0-dev.6 is a controlled-testing prerelease with a pinned macOS arm64 native runtime. Explicit Tesseract Chinese OCR is validated on macOS arm64 with PDF reading-order/search limitations; native OCR stays English-only, five native platforms have scoped evidence, and mobile-device acceptance remains open; see its release notes.

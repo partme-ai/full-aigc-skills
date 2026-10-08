@@ -245,4 +245,4 @@ Made with ❤️ by PartMe.AI Team
 
 </div>
 
-> PrintCraft 当前为 v0.1.0-dev.5 受控测试预发布，固定 macOS arm64 原生运行时；中文 OCR、其他原生平台及移动端验收仍开放。详见其发行说明。
+> PrintCraft 当前为 v0.1.0-dev.6 受控测试预发布，固定 macOS arm64 原生运行时；新增 macOS arm64 显式 Tesseract 简繁中文 OCR，原生仍仅英语，PDF 字序与长句搜索有限制；五平台直接原生验收已有独立证据，手机真机仍未验收。详见其发行说明。
